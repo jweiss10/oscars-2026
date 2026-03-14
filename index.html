@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>98th Academy Awards — Oscar Predictions 2026</title>
+  <title>98th Academy Awards -- Oscar Predictions 2026</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; }
@@ -22,34 +22,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <script type="text/babel">
 
-const JSONBIN_API_KEY = "$2a$10$7pJA5aNFtTclW4.bszbkkuEh0KP.G8lO0lculr8l0X1C1mfmQofEW";
-const JSONBIN_BIN_ID  = "69b4193caa77b81da9e03806";
+const JSONBIN_API_KEY = “$2a$10$7pJA5aNFtTclW4.bszbkkuEh0KP.G8lO0lculr8l0X1C1mfmQofEW”;
+const JSONBIN_BIN_ID  = “69b4193caa77b81da9e03806”;
 
 const CATEGORIES = [
-{ id:“best_picture”, name:“Best Picture”, icon:“🏆”, nominees:[“Bugonia”,“F1”,“Frankenstein”,“Hamnet”,“Marty Supreme”,“One Battle After Another”,“The Secret Agent”,“Sentimental Value”,“Sinners”,“Train Dreams”] },
-{ id:“best_director”, name:“Best Director”, icon:“🎬”, nominees:[“Paul Thomas Anderson — One Battle After Another”,“Ryan Coogler — Sinners”,“Josh Safdie — Marty Supreme”,“Joachim Trier — Sentimental Value”,“Chloé Zhao — Hamnet”] },
-{ id:“best_actor”, name:“Best Actor”, icon:“🎭”, nominees:[“Timothée Chalamet — Marty Supreme”,“Leonardo DiCaprio — One Battle After Another”,“Ethan Hawke — Blue Moon”,“Michael B. Jordan — Sinners”,“Wagner Moura — The Secret Agent”] },
-{ id:“best_actress”, name:“Best Actress”, icon:“🌟”, nominees:[“Jessie Buckley — Hamnet”,“Rose Byrne — If I Had Legs I’d Kick You”,“Kate Hudson — Song Sung Blue”,“Renate Reinsve — Sentimental Value”,“Emma Stone — Bugonia”] },
-{ id:“best_supporting_actor”, name:“Best Supporting Actor”, icon:“🎭”, nominees:[“Benicio Del Toro — One Battle After Another”,“Jacob Elordi — Frankenstein”,“Delroy Lindo — Sinners”,“Sean Penn — One Battle After Another”,“Stellan Skarsgård — Sentimental Value”] },
-{ id:“best_supporting_actress”, name:“Best Supporting Actress”, icon:“✨”, nominees:[“Elle Fanning — Sentimental Value”,“Inga Ibsdotter Lilleaas — Sentimental Value”,“Amy Madigan — Weapons”,“Wunmi Mosaku — Sinners”,“Teyana Taylor — One Battle After Another”] },
-{ id:“best_original_screenplay”, name:“Best Original Screenplay”, icon:“📝”, nominees:[“Blue Moon — Robert Kaplow”,“It Was Just an Accident — Jafar Panahi et al.”,“Marty Supreme — Ronald Bronstein & Josh Safdie”,“Sentimental Value — Eskil Vogt & Joachim Trier”,“Sinners — Ryan Coogler”] },
-{ id:“best_adapted_screenplay”, name:“Best Adapted Screenplay”, icon:“📖”, nominees:[“Bugonia — Will Tracy”,“Frankenstein — Guillermo del Toro”,“Hamnet — Chloé Zhao & Maggie O’Farrell”,“One Battle After Another — Paul Thomas Anderson”,“Train Dreams — Clint Bentley & Greg Kwedar”] },
-{ id:“best_animated_feature”, name:“Best Animated Feature”, icon:“🎨”, nominees:[“Arco”,“Elio”,“Kpop Demon Hunters”,“Little Amélie or the Character of Rain”,“Zootopia 2”] },
-{ id:“best_international_feature”, name:“Best International Feature Film”, icon:“🌍”, nominees:[“The Secret Agent — Brazil”,“It Was Just an Accident — France”,“Sentimental Value — Norway”,“Sirāt — Spain”,“The Voice of Hind Rajab — Tunisia”] },
-{ id:“best_documentary_feature”, name:“Best Documentary Feature”, icon:“🎥”, nominees:[“The Alabama Solution”,“Come See Me in the Good Light”,“Cutting Through Rocks”,“Mr. Nobody Against Putin”,“The Perfect Neighbor”] },
-{ id:“best_casting”, name:“Best Casting ✦ NEW”, icon:“🎪”, nominees:[“Hamnet — Nina Gold”,“Marty Supreme — Jennifer Venditti”,“One Battle After Another — Cassandra Kulukundis”,“The Secret Agent — Gabriel Domingues”,“Sinners — Francine Maisler”] },
-{ id:“best_cinematography”, name:“Best Cinematography”, icon:“📷”, nominees:[“Frankenstein — Dan Laustsen”,“Marty Supreme — Darius Khondji”,“One Battle After Another — Michael Bauman”,“Sinners — Autumn Durald Arkapaw”,“Train Dreams — Adolpho Veloso”] },
-{ id:“best_film_editing”, name:“Best Film Editing”, icon:“✂️”, nominees:[“F1 — Stephen Mirrione”,“Marty Supreme — Ronald Bronstein & Josh Safdie”,“One Battle After Another — Andy Jurgensen”,“Sentimental Value — Olivier Bugge Coutté”,“Sinners — Michael P. Shawver”] },
-{ id:“best_production_design”, name:“Best Production Design”, icon:“🏛️”, nominees:[“Frankenstein — Tamara Deverell”,“Hamnet — Fiona Crombie”,“Marty Supreme — Jack Fisk”,“One Battle After Another — Florencia Martin”,“Sinners — Hannah Beachler”] },
-{ id:“best_costume_design”, name:“Best Costume Design”, icon:“👗”, nominees:[“Avatar: Fire and Ash — Deborah L. Scott”,“Frankenstein — Kate Hawley”,“Hamnet — Malgosia Turzanska”,“Marty Supreme — Miyako Bellizzi”,“Sinners — Ruth E. Carter”] },
-{ id:“best_makeup”, name:“Best Makeup and Hairstyling”, icon:“💄”, nominees:[“Frankenstein — Mike Hill, Jordan Samuel, Cliona Furey”,“Kokuho — Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu”,“Sinners — Ken Diaz, Mike Fontaine, Shunika Terry”,“The Smashing Machine — Kazu Hiro, Glen Griffin, Bjoern Rehbein”,“The Ugly Stepsister — Thomas Foldberg, Anne Cathrine Sauerberg”] },
-{ id:“best_score”, name:“Best Original Score”, icon:“🎼”, nominees:[“Bugonia — Jerskin Fendrix”,“Frankenstein — Alexandre Desplat”,“Hamnet — Max Richter”,“One Battle After Another — Jonny Greenwood”,“Sinners — Ludwig Göransson”] },
-{ id:“best_song”, name:“Best Original Song”, icon:“🎵”, nominees:[’“Dear Me” — Diane Warren: Relentless’,’“Golden” — Kpop Demon Hunters’,’“I Lied To You” — Sinners’,’“Sweet Dreams Of Joy” — Viva Verdi!’,’“Train Dreams” — Train Dreams’] },
-{ id:“best_sound”, name:“Best Sound”, icon:“🔊”, nominees:[“F1”,“Frankenstein”,“One Battle After Another”,“Sinners”,“Sirāt”] },
-{ id:“best_vfx”, name:“Best Visual Effects”, icon:“⚡”, nominees:[“Avatar: Fire and Ash”,“F1”,“Jurassic World Rebirth”,“The Lost Bus”,“Sinners”] },
-{ id:“best_animated_short”, name:“Best Animated Short Film”, icon:“🎞️”, nominees:[“Butterfly”,“Forevergreen”,“The Girl Who Cried Pearls”,“Retirement Plan”,“The Three Sisters”] },
-{ id:“best_live_action_short”, name:“Best Live Action Short Film”, icon:“🎬”, nominees:[“Butcher’s Stain”,“A Friend of Dorothy”,“Jane Austen’s Period Drama”,“The Singers”,“Two People Exchanging Saliva”] },
-{ id:“best_documentary_short”, name:“Best Documentary Short Film”, icon:“📹”, nominees:[“All the Empty Rooms”,“Armed Only with a Camera: The Life and Death of Brent Renaud”,‘Children No More: “Were and Are Gone”’,“The Devil Is Busy”,“Perfectly a Strangeness”] },
+{ id:“best_picture”, name:“Best Picture”, icon:”🏆”, nominees:[“Bugonia”,“F1”,“Frankenstein”,“Hamnet”,“Marty Supreme”,“One Battle After Another”,“The Secret Agent”,“Sentimental Value”,“Sinners”,“Train Dreams”] },
+{ id:“best_director”, name:“Best Director”, icon:”🎬”, nominees:[“Paul Thomas Anderson – One Battle After Another”,“Ryan Coogler – Sinners”,“Josh Safdie – Marty Supreme”,“Joachim Trier – Sentimental Value”,“Chloé Zhao – Hamnet”] },
+{ id:“best_actor”, name:“Best Actor”, icon:”🎭”, nominees:[“Timothée Chalamet – Marty Supreme”,“Leonardo DiCaprio – One Battle After Another”,“Ethan Hawke – Blue Moon”,“Michael B. Jordan – Sinners”,“Wagner Moura – The Secret Agent”] },
+{ id:“best_actress”, name:“Best Actress”, icon:”🌟”, nominees:[“Jessie Buckley – Hamnet”,“Rose Byrne – If I Had Legs I’d Kick You”,“Kate Hudson – Song Sung Blue”,“Renate Reinsve – Sentimental Value”,“Emma Stone – Bugonia”] },
+{ id:“best_supporting_actor”, name:“Best Supporting Actor”, icon:”🎭”, nominees:[“Benicio Del Toro – One Battle After Another”,“Jacob Elordi – Frankenstein”,“Delroy Lindo – Sinners”,“Sean Penn – One Battle After Another”,“Stellan Skarsgård – Sentimental Value”] },
+{ id:“best_supporting_actress”, name:“Best Supporting Actress”, icon:”✨”, nominees:[“Elle Fanning – Sentimental Value”,“Inga Ibsdotter Lilleaas – Sentimental Value”,“Amy Madigan – Weapons”,“Wunmi Mosaku – Sinners”,“Teyana Taylor – One Battle After Another”] },
+{ id:“best_original_screenplay”, name:“Best Original Screenplay”, icon:”📝”, nominees:[“Blue Moon – Robert Kaplow”,“It Was Just an Accident – Jafar Panahi et al.”,“Marty Supreme – Ronald Bronstein & Josh Safdie”,“Sentimental Value – Eskil Vogt & Joachim Trier”,“Sinners – Ryan Coogler”] },
+{ id:“best_adapted_screenplay”, name:“Best Adapted Screenplay”, icon:”📖”, nominees:[“Bugonia – Will Tracy”,“Frankenstein – Guillermo del Toro”,“Hamnet – Chloé Zhao & Maggie O’Farrell”,“One Battle After Another – Paul Thomas Anderson”,“Train Dreams – Clint Bentley & Greg Kwedar”] },
+{ id:“best_animated_feature”, name:“Best Animated Feature”, icon:”🎨”, nominees:[“Arco”,“Elio”,“Kpop Demon Hunters”,“Little Amélie or the Character of Rain”,“Zootopia 2”] },
+{ id:“best_international_feature”, name:“Best International Feature Film”, icon:”🌍”, nominees:[“The Secret Agent – Brazil”,“It Was Just an Accident – France”,“Sentimental Value – Norway”,“Sirāt – Spain”,“The Voice of Hind Rajab – Tunisia”] },
+{ id:“best_documentary_feature”, name:“Best Documentary Feature”, icon:”🎥”, nominees:[“The Alabama Solution”,“Come See Me in the Good Light”,“Cutting Through Rocks”,“Mr. Nobody Against Putin”,“The Perfect Neighbor”] },
+{ id:“best_casting”, name:“Best Casting ✦ NEW”, icon:”🎪”, nominees:[“Hamnet – Nina Gold”,“Marty Supreme – Jennifer Venditti”,“One Battle After Another – Cassandra Kulukundis”,“The Secret Agent – Gabriel Domingues”,“Sinners – Francine Maisler”] },
+{ id:“best_cinematography”, name:“Best Cinematography”, icon:”📷”, nominees:[“Frankenstein – Dan Laustsen”,“Marty Supreme – Darius Khondji”,“One Battle After Another – Michael Bauman”,“Sinners – Autumn Durald Arkapaw”,“Train Dreams – Adolpho Veloso”] },
+{ id:“best_film_editing”, name:“Best Film Editing”, icon:”✂️”, nominees:[“F1 – Stephen Mirrione”,“Marty Supreme – Ronald Bronstein & Josh Safdie”,“One Battle After Another – Andy Jurgensen”,“Sentimental Value – Olivier Bugge Coutté”,“Sinners – Michael P. Shawver”] },
+{ id:“best_production_design”, name:“Best Production Design”, icon:”🏛️”, nominees:[“Frankenstein – Tamara Deverell”,“Hamnet – Fiona Crombie”,“Marty Supreme – Jack Fisk”,“One Battle After Another – Florencia Martin”,“Sinners – Hannah Beachler”] },
+{ id:“best_costume_design”, name:“Best Costume Design”, icon:”👗”, nominees:[“Avatar: Fire and Ash – Deborah L. Scott”,“Frankenstein – Kate Hawley”,“Hamnet – Malgosia Turzanska”,“Marty Supreme – Miyako Bellizzi”,“Sinners – Ruth E. Carter”] },
+{ id:“best_makeup”, name:“Best Makeup and Hairstyling”, icon:”💄”, nominees:[“Frankenstein – Mike Hill, Jordan Samuel, Cliona Furey”,“Kokuho – Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu”,“Sinners – Ken Diaz, Mike Fontaine, Shunika Terry”,“The Smashing Machine – Kazu Hiro, Glen Griffin, Bjoern Rehbein”,“The Ugly Stepsister – Thomas Foldberg, Anne Cathrine Sauerberg”] },
+{ id:“best_score”, name:“Best Original Score”, icon:”🎼”, nominees:[“Bugonia – Jerskin Fendrix”,“Frankenstein – Alexandre Desplat”,“Hamnet – Max Richter”,“One Battle After Another – Jonny Greenwood”,“Sinners – Ludwig Göransson”] },
+{ id:“best_song”, name:“Best Original Song”, icon:”🎵”, nominees:[’“Dear Me” – Diane Warren: Relentless’,’“Golden” – Kpop Demon Hunters’,’“I Lied To You” – Sinners’,’“Sweet Dreams Of Joy” – Viva Verdi!’,’“Train Dreams” – Train Dreams’] },
+{ id:“best_sound”, name:“Best Sound”, icon:”🔊”, nominees:[“F1”,“Frankenstein”,“One Battle After Another”,“Sinners”,“Sirāt”] },
+{ id:“best_vfx”, name:“Best Visual Effects”, icon:”⚡”, nominees:[“Avatar: Fire and Ash”,“F1”,“Jurassic World Rebirth”,“The Lost Bus”,“Sinners”] },
+{ id:“best_animated_short”, name:“Best Animated Short Film”, icon:”🎞️”, nominees:[“Butterfly”,“Forevergreen”,“The Girl Who Cried Pearls”,“Retirement Plan”,“The Three Sisters”] },
+{ id:“best_live_action_short”, name:“Best Live Action Short Film”, icon:”🎬”, nominees:[“Butcher’s Stain”,“A Friend of Dorothy”,“Jane Austen’s Period Drama”,“The Singers”,“Two People Exchanging Saliva”] },
+{ id:“best_documentary_short”, name:“Best Documentary Short Film”, icon:”📹”, nominees:[“All the Empty Rooms”,“Armed Only with a Camera: The Life and Death of Brent Renaud”,‘Children No More: “Were and Are Gone”’,“The Devil Is Busy”,“Perfectly a Strangeness”] },
 ];
 
 // ── PALETTE ──────────────────────────────────────────────────────────────────
@@ -161,12 +161,12 @@ return (
 <div style={{ display: “flex”, alignItems: “center”, gap: “0.4rem” }}>
 <div style={{ width: 12, height: 12, borderRadius: 2, background: C.willWinBg, border: `2px solid ${C.willWinBorder}` }} />
 <span style={{ fontSize: “0.72rem”, color: C.willWin, fontWeight: “bold” }}>Will Win</span>
-<span style={{ fontSize: “0.68rem”, color: C.textLight }}>— your prediction</span>
+<span style={{ fontSize: “0.68rem”, color: C.textLight }}>– your prediction</span>
 </div>
 <div style={{ display: “flex”, alignItems: “center”, gap: “0.4rem” }}>
 <div style={{ width: 12, height: 12, borderRadius: 2, background: C.shouldWinBg, border: `2px solid ${C.shouldWinBorder}` }} />
 <span style={{ fontSize: “0.72rem”, color: C.shouldWin, fontWeight: “bold” }}>Should Win</span>
-<span style={{ fontSize: “0.68rem”, color: C.textLight }}>— your preference</span>
+<span style={{ fontSize: “0.68rem”, color: C.textLight }}>– your preference</span>
 </div>
 </div>
 );
@@ -270,7 +270,7 @@ Oscar Predictions
     </div>
 
     <p style={{ color: C.textMid, fontSize: "0.9rem", lineHeight: 1.75, marginBottom: "1.5rem" }}>
-      For each category, pick who you think <strong style={{ color: C.willWin }}>will win</strong> and who you think <strong style={{ color: C.shouldWin }}>should win</strong>. They can be the same — or tell a completely different story.
+      For each category, pick who you think <strong style={{ color: C.willWin }}>will win</strong> and who you think <strong style={{ color: C.shouldWin }}>should win</strong>. They can be the same -- or tell a completely different story.
     </p>
     <input
       type="text" placeholder="Your name" value={name}
@@ -279,7 +279,7 @@ Oscar Predictions
       style={{ width: "100%", padding: "0.9rem 1.2rem", background: C.bgCard, border: `1.5px solid ${C.border}`, borderRadius: 6, color: C.text, fontSize: "1rem", outline: "none", marginBottom: "0.7rem" }}
     />
     <button disabled={!name.trim()} onClick={onStart} style={{ width: "100%", padding: "1rem", background: name.trim() ? goldGrad : C.border, border: "none", borderRadius: 6, color: name.trim() ? "#1A1208" : C.textLight, fontSize: "0.9rem", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, cursor: name.trim() ? "pointer" : "not-allowed", marginBottom: "0.7rem" }}>
-      Enter the Ballot →
+      Enter the Ballot &#8594;
     </button>
     {subCount > 0 && (
       <button onClick={onViewSubs} style={{ width: "100%", padding: "0.75rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>
@@ -332,7 +332,7 @@ return (
         <div style={{ position: "fixed", top: 0, right: 0, bottom: 0, width: "78%", maxWidth: 290, background: C.bgDeep, zIndex: 50, overflowY: "auto", borderLeft: `2px solid ${C.borderGold}`, display: "flex", flexDirection: "column" }}>
           <div style={{ padding: "0.9rem 1rem", borderBottom: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
             <span style={{ color: C.gold, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>All Categories</span>
-            <button onClick={() => setDrawerOpen(false)} style={{ background: "none", border: "none", color: C.textLight, fontSize: "1.2rem", cursor: "pointer", padding: 0 }}>✕</button>
+            <button onClick={() => setDrawerOpen(false)} style={{ background: "none", border: "none", color: C.textLight, fontSize: "1.2rem", cursor: "pointer", padding: 0 }}>&#10005;</button>
           </div>
           <div style={{ overflowY: "auto", flex: 1 }}>
             <CategoryList picks={picks} activeCategory={activeCat} onSelect={goTo} />
@@ -355,8 +355,8 @@ return (
         {/* Current picks summary */}
         {(catPick.willWin || catPick.shouldWin) && (
           <div style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 6, padding: "0.6rem 0.9rem", marginBottom: "0.9rem", fontSize: "0.75rem" }}>
-            {catPick.willWin && <div><span style={{ color: C.willWin, fontWeight: "bold" }}>Will Win: </span><span style={{ color: C.text }}>{catPick.willWin.split(" — ")[0]}</span></div>}
-            {catPick.shouldWin && <div style={{ marginTop: catPick.willWin ? 3 : 0 }}><span style={{ color: C.shouldWin, fontWeight: "bold" }}>Should Win: </span><span style={{ color: C.text }}>{catPick.shouldWin.split(" — ")[0]}</span></div>}
+            {catPick.willWin && <div><span style={{ color: C.willWin, fontWeight: "bold" }}>Will Win: </span><span style={{ color: C.text }}>{catPick.willWin.split(" -- ")[0]}</span></div>}
+            {catPick.shouldWin && <div style={{ marginTop: catPick.willWin ? 3 : 0 }}><span style={{ color: C.shouldWin, fontWeight: "bold" }}>Should Win: </span><span style={{ color: C.text }}>{catPick.shouldWin.split(" -- ")[0]}</span></div>}
           </div>
         )}
 
@@ -374,10 +374,10 @@ return (
         </div>
 
         <div style={{ display: "flex", gap: "0.65rem", marginTop: "1.75rem" }}>
-          <button onClick={() => goTo(activeCat - 1)} disabled={activeCat === 0} style={{ padding: "0.75rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: activeCat === 0 ? C.border : C.textMid, fontSize: "0.78rem", cursor: activeCat === 0 ? "not-allowed" : "pointer", fontFamily: ff }}>← Prev</button>
+          <button onClick={() => goTo(activeCat - 1)} disabled={activeCat === 0} style={{ padding: "0.75rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: activeCat === 0 ? C.border : C.textMid, fontSize: "0.78rem", cursor: activeCat === 0 ? "not-allowed" : "pointer", fontFamily: ff }}>&#8592; Prev</button>
           {activeCat < TOTAL - 1
-            ? <button onClick={() => goTo(activeCat + 1)} style={{ flex: 1, padding: "0.75rem", background: (catPick.willWin && catPick.shouldWin) ? goldGrad : C.bgDeep, border: `1px solid ${C.border}`, borderRadius: 6, color: (catPick.willWin && catPick.shouldWin) ? C.text : C.textMid, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: (catPick.willWin && catPick.shouldWin) ? 700 : 400 }}>Next →</button>
-            : <button onClick={onReview} style={{ flex: 1, padding: "0.75rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review Ballot →</button>
+            ? <button onClick={() => goTo(activeCat + 1)} style={{ flex: 1, padding: "0.75rem", background: (catPick.willWin && catPick.shouldWin) ? goldGrad : C.bgDeep, border: `1px solid ${C.border}`, borderRadius: 6, color: (catPick.willWin && catPick.shouldWin) ? C.text : C.textMid, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: (catPick.willWin && catPick.shouldWin) ? 700 : 400 }}>Next &#8594;</button>
+            : <button onClick={onReview} style={{ flex: 1, padding: "0.75rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review Ballot &#8594;</button>
           }
         </div>
       </div>
@@ -386,8 +386,8 @@ return (
 
   {isMobile && countPicked(picks) > 0 && (
     <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: C.bgDeep, borderTop: `2px solid ${C.borderGold}`, padding: "0.7rem 1rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 30 }}>
-      <div style={{ fontSize: "0.72rem", color: C.textLight }}>{complete === TOTAL ? "🎉 All complete!" : `${complete}/${TOTAL} complete`}</div>
-      <button onClick={onReview} style={{ padding: "0.55rem 1.2rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.75rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review & Submit →</button>
+      <div style={{ fontSize: "0.72rem", color: C.textLight }}>{complete === TOTAL ? "&#127881; All complete!" : `${complete}/${TOTAL} complete`}</div>
+      <button onClick={onReview} style={{ padding: "0.55rem 1.2rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.75rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review & Submit &#8594;</button>
     </div>
   )}
 </div>
@@ -429,9 +429,9 @@ return (
         const anyPick = p.willWin || p.shouldWin;
         return (
           <div key={c.id} style={{ display: "flex", gap: "0.5rem", padding: "0.55rem 0.85rem", background: anyPick ? C.bgCard : "#FFF8F5", border: `1px solid ${anyPick ? C.border : "#DDBBAA"}`, borderRadius: 5, alignItems: "flex-start" }}>
-            <div style={{ color: C.textLight, fontSize: "0.67rem", lineHeight: 1.4, minWidth: isMobile ? 85 : 165, flexShrink: 0, paddingTop: 1 }}>{c.name.replace(" ✦ NEW","")}</div>
-            <div style={{ flex: 1, color: p.willWin ? C.willWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.willWin ? p.willWin.split(" — ")[0] : <em style={{ color: C.border }}>—</em>}</div>
-            <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.shouldWin ? p.shouldWin.split(" — ")[0] : <em style={{ color: C.border }}>—</em>}</div>
+            <div style={{ color: C.textLight, fontSize: "0.67rem", lineHeight: 1.4, minWidth: isMobile ? 85 : 165, flexShrink: 0, paddingTop: 1 }}>{c.name.replace(" &#10022; NEW","")}</div>
+            <div style={{ flex: 1, color: p.willWin ? C.willWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.willWin ? p.willWin.split(" -- ")[0] : <em style={{ color: C.border }}>--</em>}</div>
+            <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.shouldWin ? p.shouldWin.split(" -- ")[0] : <em style={{ color: C.border }}>--</em>}</div>
             <button onClick={() => setEditing(true)} style={{ background: "transparent", border: "none", color: C.textLight, cursor: "pointer", fontSize: "0.65rem", padding: 0, fontFamily: ff, flexShrink: 0, width: 28, textAlign: "right" }}>edit</button>
           </div>
         );
@@ -440,9 +440,9 @@ return (
   </div>
 
   <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: C.bgDeep, borderTop: `2px solid ${C.borderGold}`, padding: "0.75rem 1rem", display: "flex", gap: "0.65rem", zIndex: 30, boxShadow: "0 -2px 10px rgba(0,0,0,0.08)" }}>
-    <button onClick={onBack} style={{ padding: "0.85rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", cursor: "pointer", fontFamily: ff, whiteSpace: "nowrap" }}>← Back</button>
+    <button onClick={onBack} style={{ padding: "0.85rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", cursor: "pointer", fontFamily: ff, whiteSpace: "nowrap" }}>&#8592; Back</button>
     <button onClick={onSubmit} disabled={saving} style={{ flex: 1, padding: "0.85rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.85rem", cursor: "pointer", fontFamily: ff, fontWeight: 700, opacity: saving ? 0.7 : 1 }}>
-      {saving ? "Submitting…" : "🏆 Submit My Ballot"}
+      {saving ? "Submitting&#8230;" : "&#127942; Submit My Ballot"}
     </button>
   </div>
 </div>
@@ -487,7 +487,7 @@ return (
 ```
   {subs.length === 0 ? (
     <div style={{ textAlign: "center", color: C.textLight, padding: "4rem 0" }}>
-      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎬</div>No submissions yet. Be the first!
+      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>&#127916;</div>No submissions yet. Be the first!
     </div>
   ) : (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
@@ -499,9 +499,9 @@ return (
             <button onClick={() => setExpanded(open ? null : i)} style={{ width: "100%", padding: "0.85rem 1rem", background: C.bgDeep, border: "none", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", fontFamily: ff, textAlign: "left" }}>
               <div>
                 <div style={{ color: C.text, fontSize: "0.95rem", fontWeight: "bold" }}>{s.name}</div>
-                <div style={{ color: C.textLight, fontSize: "0.65rem", marginTop: 2 }}>{cnt}/{TOTAL} categories · {new Date(s.submittedAt).toLocaleDateString()}</div>
+                <div style={{ color: C.textLight, fontSize: "0.65rem", marginTop: 2 }}>{cnt}/{TOTAL} categories &#183; {new Date(s.submittedAt).toLocaleDateString()}</div>
               </div>
-              <span style={{ color: C.gold, fontSize: "0.75rem" }}>{open ? "▲" : "▼"}</span>
+              <span style={{ color: C.gold, fontSize: "0.75rem" }}>{open ? "&#9650;" : "&#9660;"}</span>
             </button>
             {open && (
               <div style={{ padding: "0.85rem 1rem" }}>
@@ -514,9 +514,9 @@ return (
                   const p = getPick(s.picks || {}, c.id);
                   return (
                     <div key={c.id} style={{ display: "flex", gap: "0.5rem", padding: "0.25rem 0", borderBottom: `1px solid ${C.bgDeep}` }}>
-                      <div style={{ color: C.textLight, fontSize: "0.68rem", minWidth: isMobile ? 80 : 150, flexShrink: 0 }}>{c.name.replace(" ✦ NEW","")}</div>
-                      <div style={{ flex: 1, color: p.willWin ? C.willWin : C.border, fontSize: "0.72rem" }}>{p.willWin ? p.willWin.split(" — ")[0] : "—"}</div>
-                      <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : C.border, fontSize: "0.72rem" }}>{p.shouldWin ? p.shouldWin.split(" — ")[0] : "—"}</div>
+                      <div style={{ color: C.textLight, fontSize: "0.68rem", minWidth: isMobile ? 80 : 150, flexShrink: 0 }}>{c.name.replace(" &#10022; NEW","")}</div>
+                      <div style={{ flex: 1, color: p.willWin ? C.willWin : C.border, fontSize: "0.72rem" }}>{p.willWin ? p.willWin.split(" -- ")[0] : "--"}</div>
+                      <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : C.border, fontSize: "0.72rem" }}>{p.shouldWin ? p.shouldWin.split(" -- ")[0] : "--"}</div>
                     </div>
                   );
                 })}
