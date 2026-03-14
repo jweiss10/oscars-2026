@@ -1,818 +1,570 @@
 <!DOCTYPE html>
 
-
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
   <title>98th Academy Awards — Oscar Predictions 2026</title>
-
   <style>
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html, body, #root { height: 100%; }
-
-    body { background: #0A0A0A; font-family: Georgia, serif; -webkit-tap-highlight-color: transparent; }
-
+    body { background: #F5F0E8; font-family: Georgia, serif; -webkit-tap-highlight-color: transparent; color: #1A1208; }
     input, button { font-family: Georgia, serif; }
-
-    ::-webkit-scrollbar { width: 4px; }
-
-    ::-webkit-scrollbar-track { background: #111; }
-
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
-
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #EDE8DC; }
+    ::-webkit-scrollbar-thumb { background: #C9A227; border-radius: 3px; }
   </style>
-
 </head>
-
 <body>
-
 <div id="root"></div>
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-
-
-
 <script type="text/babel">
 
-// ─────────────────────────────────────────────────────────────────────────────
-
-// CONFIGURATION — paste your JSONBin credentials here
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-const JSONBIN_API_KEY = "$2a$10$7pJA5aNFtTclW4.bszbkkuEh0KP.G8lO0lculr8l0X1C1mfmQofEW";
-
-const JSONBIN_BIN_ID  = "69b4193caa77b81da9e03806";
-
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// DATA
-
-// ─────────────────────────────────────────────────────────────────────────────
+const JSONBIN_API_KEY = “$2a$10$7pJA5aNFtTclW4.bszbkkuEh0KP.G8lO0lculr8l0X1C1mfmQofEW”;
+const JSONBIN_BIN_ID  = “69b4193caa77b81da9e03806”;
 
 const CATEGORIES = [
-
-  { id:"best_picture", name:"Best Picture", icon:"🏆", nominees:["Bugonia","F1","Frankenstein","Hamnet","Marty Supreme","One Battle After Another","The Secret Agent","Sentimental Value","Sinners","Train Dreams"] },
-
-  { id:"best_director", name:"Best Director", icon:"🎬", nominees:["Paul Thomas Anderson — One Battle After Another","Ryan Coogler — Sinners","Josh Safdie — Marty Supreme","Joachim Trier — Sentimental Value","Chloé Zhao — Hamnet"] },
-
-  { id:"best_actor", name:"Best Actor", icon:"🎭", nominees:["Timothée Chalamet — Marty Supreme","Leonardo DiCaprio — One Battle After Another","Ethan Hawke — Blue Moon","Michael B. Jordan — Sinners","Wagner Moura — The Secret Agent"] },
-
-  { id:"best_actress", name:"Best Actress", icon:"🌟", nominees:["Jessie Buckley — Hamnet","Rose Byrne — If I Had Legs I'd Kick You","Kate Hudson — Song Sung Blue","Renate Reinsve — Sentimental Value","Emma Stone — Bugonia"] },
-
-  { id:"best_supporting_actor", name:"Best Supporting Actor", icon:"🎭", nominees:["Benicio Del Toro — One Battle After Another","Jacob Elordi — Frankenstein","Delroy Lindo — Sinners","Sean Penn — One Battle After Another","Stellan Skarsgård — Sentimental Value"] },
-
-  { id:"best_supporting_actress", name:"Best Supporting Actress", icon:"✨", nominees:["Elle Fanning — Sentimental Value","Inga Ibsdotter Lilleaas — Sentimental Value","Amy Madigan — Weapons","Wunmi Mosaku — Sinners","Teyana Taylor — One Battle After Another"] },
-
-  { id:"best_original_screenplay", name:"Best Original Screenplay", icon:"📝", nominees:["Blue Moon — Robert Kaplow","It Was Just an Accident — Jafar Panahi et al.","Marty Supreme — Ronald Bronstein & Josh Safdie","Sentimental Value — Eskil Vogt & Joachim Trier","Sinners — Ryan Coogler"] },
-
-  { id:"best_adapted_screenplay", name:"Best Adapted Screenplay", icon:"📖", nominees:["Bugonia — Will Tracy","Frankenstein — Guillermo del Toro","Hamnet — Chloé Zhao & Maggie O'Farrell","One Battle After Another — Paul Thomas Anderson","Train Dreams — Clint Bentley & Greg Kwedar"] },
-
-  { id:"best_animated_feature", name:"Best Animated Feature", icon:"🎨", nominees:["Arco","Elio","Kpop Demon Hunters","Little Amélie or the Character of Rain","Zootopia 2"] },
-
-  { id:"best_international_feature", name:"Best International Feature Film", icon:"🌍", nominees:["The Secret Agent — Brazil","It Was Just an Accident — France","Sentimental Value — Norway","Sirāt — Spain","The Voice of Hind Rajab — Tunisia"] },
-
-  { id:"best_documentary_feature", name:"Best Documentary Feature", icon:"🎥", nominees:["The Alabama Solution","Come See Me in the Good Light","Cutting Through Rocks","Mr. Nobody Against Putin","The Perfect Neighbor"] },
-
-  { id:"best_casting", name:"Best Casting ✦ NEW", icon:"🎪", nominees:["Hamnet — Nina Gold","Marty Supreme — Jennifer Venditti","One Battle After Another — Cassandra Kulukundis","The Secret Agent — Gabriel Domingues","Sinners — Francine Maisler"] },
-
-  { id:"best_cinematography", name:"Best Cinematography", icon:"📷", nominees:["Frankenstein — Dan Laustsen","Marty Supreme — Darius Khondji","One Battle After Another — Michael Bauman","Sinners — Autumn Durald Arkapaw","Train Dreams — Adolpho Veloso"] },
-
-  { id:"best_film_editing", name:"Best Film Editing", icon:"✂️", nominees:["F1 — Stephen Mirrione","Marty Supreme — Ronald Bronstein & Josh Safdie","One Battle After Another — Andy Jurgensen","Sentimental Value — Olivier Bugge Coutté","Sinners — Michael P. Shawver"] },
-
-  { id:"best_production_design", name:"Best Production Design", icon:"🏛️", nominees:["Frankenstein — Tamara Deverell","Hamnet — Fiona Crombie","Marty Supreme — Jack Fisk","One Battle After Another — Florencia Martin","Sinners — Hannah Beachler"] },
-
-  { id:"best_costume_design", name:"Best Costume Design", icon:"👗", nominees:["Avatar: Fire and Ash — Deborah L. Scott","Frankenstein — Kate Hawley","Hamnet — Malgosia Turzanska","Marty Supreme — Miyako Bellizzi","Sinners — Ruth E. Carter"] },
-
-  { id:"best_makeup", name:"Best Makeup and Hairstyling", icon:"💄", nominees:["Frankenstein — Mike Hill, Jordan Samuel, Cliona Furey","Kokuho — Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu","Sinners — Ken Diaz, Mike Fontaine, Shunika Terry","The Smashing Machine — Kazu Hiro, Glen Griffin, Bjoern Rehbein","The Ugly Stepsister — Thomas Foldberg, Anne Cathrine Sauerberg"] },
-
-  { id:"best_score", name:"Best Original Score", icon:"🎼", nominees:["Bugonia — Jerskin Fendrix","Frankenstein — Alexandre Desplat","Hamnet — Max Richter","One Battle After Another — Jonny Greenwood","Sinners — Ludwig Göransson"] },
-
-  { id:"best_song", name:"Best Original Song", icon:"🎵", nominees:['"Dear Me" — Diane Warren: Relentless','"Golden" — Kpop Demon Hunters','"I Lied To You" — Sinners','"Sweet Dreams Of Joy" — Viva Verdi!','"Train Dreams" — Train Dreams'] },
-
-  { id:"best_sound", name:"Best Sound", icon:"🔊", nominees:["F1","Frankenstein","One Battle After Another","Sinners","Sirāt"] },
-
-  { id:"best_vfx", name:"Best Visual Effects", icon:"⚡", nominees:["Avatar: Fire and Ash","F1","Jurassic World Rebirth","The Lost Bus","Sinners"] },
-
-  { id:"best_animated_short", name:"Best Animated Short Film", icon:"🎞️", nominees:["Butterfly","Forevergreen","The Girl Who Cried Pearls","Retirement Plan","The Three Sisters"] },
-
-  { id:"best_live_action_short", name:"Best Live Action Short Film", icon:"🎬", nominees:["Butcher's Stain","A Friend of Dorothy","Jane Austen's Period Drama","The Singers","Two People Exchanging Saliva"] },
-
-  { id:"best_documentary_short", name:"Best Documentary Short Film", icon:"📹", nominees:["All the Empty Rooms","Armed Only with a Camera: The Life and Death of Brent Renaud","Children No More: \"Were and Are Gone\"","The Devil Is Busy","Perfectly a Strangeness"] },
-
+{ id:“best_picture”, name:“Best Picture”, icon:“🏆”, nominees:[“Bugonia”,“F1”,“Frankenstein”,“Hamnet”,“Marty Supreme”,“One Battle After Another”,“The Secret Agent”,“Sentimental Value”,“Sinners”,“Train Dreams”] },
+{ id:“best_director”, name:“Best Director”, icon:“🎬”, nominees:[“Paul Thomas Anderson — One Battle After Another”,“Ryan Coogler — Sinners”,“Josh Safdie — Marty Supreme”,“Joachim Trier — Sentimental Value”,“Chloé Zhao — Hamnet”] },
+{ id:“best_actor”, name:“Best Actor”, icon:“🎭”, nominees:[“Timothée Chalamet — Marty Supreme”,“Leonardo DiCaprio — One Battle After Another”,“Ethan Hawke — Blue Moon”,“Michael B. Jordan — Sinners”,“Wagner Moura — The Secret Agent”] },
+{ id:“best_actress”, name:“Best Actress”, icon:“🌟”, nominees:[“Jessie Buckley — Hamnet”,“Rose Byrne — If I Had Legs I’d Kick You”,“Kate Hudson — Song Sung Blue”,“Renate Reinsve — Sentimental Value”,“Emma Stone — Bugonia”] },
+{ id:“best_supporting_actor”, name:“Best Supporting Actor”, icon:“🎭”, nominees:[“Benicio Del Toro — One Battle After Another”,“Jacob Elordi — Frankenstein”,“Delroy Lindo — Sinners”,“Sean Penn — One Battle After Another”,“Stellan Skarsgård — Sentimental Value”] },
+{ id:“best_supporting_actress”, name:“Best Supporting Actress”, icon:“✨”, nominees:[“Elle Fanning — Sentimental Value”,“Inga Ibsdotter Lilleaas — Sentimental Value”,“Amy Madigan — Weapons”,“Wunmi Mosaku — Sinners”,“Teyana Taylor — One Battle After Another”] },
+{ id:“best_original_screenplay”, name:“Best Original Screenplay”, icon:“📝”, nominees:[“Blue Moon — Robert Kaplow”,“It Was Just an Accident — Jafar Panahi et al.”,“Marty Supreme — Ronald Bronstein & Josh Safdie”,“Sentimental Value — Eskil Vogt & Joachim Trier”,“Sinners — Ryan Coogler”] },
+{ id:“best_adapted_screenplay”, name:“Best Adapted Screenplay”, icon:“📖”, nominees:[“Bugonia — Will Tracy”,“Frankenstein — Guillermo del Toro”,“Hamnet — Chloé Zhao & Maggie O’Farrell”,“One Battle After Another — Paul Thomas Anderson”,“Train Dreams — Clint Bentley & Greg Kwedar”] },
+{ id:“best_animated_feature”, name:“Best Animated Feature”, icon:“🎨”, nominees:[“Arco”,“Elio”,“Kpop Demon Hunters”,“Little Amélie or the Character of Rain”,“Zootopia 2”] },
+{ id:“best_international_feature”, name:“Best International Feature Film”, icon:“🌍”, nominees:[“The Secret Agent — Brazil”,“It Was Just an Accident — France”,“Sentimental Value — Norway”,“Sirāt — Spain”,“The Voice of Hind Rajab — Tunisia”] },
+{ id:“best_documentary_feature”, name:“Best Documentary Feature”, icon:“🎥”, nominees:[“The Alabama Solution”,“Come See Me in the Good Light”,“Cutting Through Rocks”,“Mr. Nobody Against Putin”,“The Perfect Neighbor”] },
+{ id:“best_casting”, name:“Best Casting ✦ NEW”, icon:“🎪”, nominees:[“Hamnet — Nina Gold”,“Marty Supreme — Jennifer Venditti”,“One Battle After Another — Cassandra Kulukundis”,“The Secret Agent — Gabriel Domingues”,“Sinners — Francine Maisler”] },
+{ id:“best_cinematography”, name:“Best Cinematography”, icon:“📷”, nominees:[“Frankenstein — Dan Laustsen”,“Marty Supreme — Darius Khondji”,“One Battle After Another — Michael Bauman”,“Sinners — Autumn Durald Arkapaw”,“Train Dreams — Adolpho Veloso”] },
+{ id:“best_film_editing”, name:“Best Film Editing”, icon:“✂️”, nominees:[“F1 — Stephen Mirrione”,“Marty Supreme — Ronald Bronstein & Josh Safdie”,“One Battle After Another — Andy Jurgensen”,“Sentimental Value — Olivier Bugge Coutté”,“Sinners — Michael P. Shawver”] },
+{ id:“best_production_design”, name:“Best Production Design”, icon:“🏛️”, nominees:[“Frankenstein — Tamara Deverell”,“Hamnet — Fiona Crombie”,“Marty Supreme — Jack Fisk”,“One Battle After Another — Florencia Martin”,“Sinners — Hannah Beachler”] },
+{ id:“best_costume_design”, name:“Best Costume Design”, icon:“👗”, nominees:[“Avatar: Fire and Ash — Deborah L. Scott”,“Frankenstein — Kate Hawley”,“Hamnet — Malgosia Turzanska”,“Marty Supreme — Miyako Bellizzi”,“Sinners — Ruth E. Carter”] },
+{ id:“best_makeup”, name:“Best Makeup and Hairstyling”, icon:“💄”, nominees:[“Frankenstein — Mike Hill, Jordan Samuel, Cliona Furey”,“Kokuho — Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu”,“Sinners — Ken Diaz, Mike Fontaine, Shunika Terry”,“The Smashing Machine — Kazu Hiro, Glen Griffin, Bjoern Rehbein”,“The Ugly Stepsister — Thomas Foldberg, Anne Cathrine Sauerberg”] },
+{ id:“best_score”, name:“Best Original Score”, icon:“🎼”, nominees:[“Bugonia — Jerskin Fendrix”,“Frankenstein — Alexandre Desplat”,“Hamnet — Max Richter”,“One Battle After Another — Jonny Greenwood”,“Sinners — Ludwig Göransson”] },
+{ id:“best_song”, name:“Best Original Song”, icon:“🎵”, nominees:[’“Dear Me” — Diane Warren: Relentless’,’“Golden” — Kpop Demon Hunters’,’“I Lied To You” — Sinners’,’“Sweet Dreams Of Joy” — Viva Verdi!’,’“Train Dreams” — Train Dreams’] },
+{ id:“best_sound”, name:“Best Sound”, icon:“🔊”, nominees:[“F1”,“Frankenstein”,“One Battle After Another”,“Sinners”,“Sirāt”] },
+{ id:“best_vfx”, name:“Best Visual Effects”, icon:“⚡”, nominees:[“Avatar: Fire and Ash”,“F1”,“Jurassic World Rebirth”,“The Lost Bus”,“Sinners”] },
+{ id:“best_animated_short”, name:“Best Animated Short Film”, icon:“🎞️”, nominees:[“Butterfly”,“Forevergreen”,“The Girl Who Cried Pearls”,“Retirement Plan”,“The Three Sisters”] },
+{ id:“best_live_action_short”, name:“Best Live Action Short Film”, icon:“🎬”, nominees:[“Butcher’s Stain”,“A Friend of Dorothy”,“Jane Austen’s Period Drama”,“The Singers”,“Two People Exchanging Saliva”] },
+{ id:“best_documentary_short”, name:“Best Documentary Short Film”, icon:“📹”, nominees:[“All the Empty Rooms”,“Armed Only with a Camera: The Life and Death of Brent Renaud”,‘Children No More: “Were and Are Gone”’,“The Devil Is Busy”,“Perfectly a Strangeness”] },
 ];
 
+// ── PALETTE ──────────────────────────────────────────────────────────────────
+const C = {
+bg:        “#F5F0E8”,
+bgDeep:    “#EDE8DC”,
+bgCard:    “#FAF7F2”,
+border:    “#DDD5C0”,
+borderGold:”#C9A227”,
+gold:      “#B8960C”,
+goldDark:  “#8B6914”,
+goldLight: “#F5D060”,
+text:      “#1A1208”,
+textMid:   “#5A4A2A”,
+textLight: “#8A7A5A”,
+willWin:   “#1A3A5C”,   // deep navy for Will Win
+shouldWin: “#4A1A0A”,   // deep burgundy for Should Win
+willWinBg: “#EAF0F8”,
+shouldWinBg:”#F8EDE8”,
+willWinBorder:”#7AAAD0”,
+shouldWinBorder:”#C07060”,
+};
 
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// JSONBIN API
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-const BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-
-const HEADERS = { "Content-Type":"application/json", "X-Master-Key": JSONBIN_API_KEY, "X-Bin-Versioning":"false" };
-
-
-
-async function loadSubs() {
-
-  try {
-
-    const r = await fetch(BASE, { headers: HEADERS });
-
-    if (!r.ok) throw new Error();
-
-    const j = await r.json();
-
-    return Array.isArray(j.record) ? j.record : [];
-
-  } catch { return []; }
-
-}
-
-
-
-async function saveSub(sub) {
-
-  const existing = await loadSubs();
-
-  existing.push(sub);
-
-  await fetch(BASE, { method:"PUT", headers: HEADERS, body: JSON.stringify(existing) });
-
-}
-
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// CONSTANTS
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-const gold = "linear-gradient(135deg,#B8960C 0%,#F5D060 40%,#C9A227 70%,#8B6914 100%)";
-
-const bg   = "#0A0A0A";
-
-const ff   = "Georgia,serif";
-
+const goldGrad = `linear-gradient(135deg, ${C.gold} 0%, ${C.goldLight} 45%, ${C.borderGold} 70%, ${C.goldDark} 100%)`;
+const ff = “Georgia, serif”;
 const TOTAL = CATEGORIES.length;
 
+// ── JSONBIN ───────────────────────────────────────────────────────────────────
+const BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+const HDR  = { “Content-Type”:“application/json”, “X-Master-Key”: JSONBIN_API_KEY, “X-Bin-Versioning”:“false” };
 
+async function loadSubs() {
+try {
+const r = await fetch(BASE, { headers: HDR });
+if (!r.ok) throw new Error();
+const j = await r.json();
+return (Array.isArray(j.record) ? j.record : []).filter(s => !s.init);
+} catch { return []; }
+}
+async function saveSub(sub) {
+const existing = await loadSubs();
+existing.push(sub);
+// preserve init record
+await fetch(BASE, { method:“PUT”, headers: HDR, body: JSON.stringify([{init:true}, …existing]) });
+}
 
-// ─────────────────────────────────────────────────────────────────────────────
-
-// HOOKS
-
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ── HOOKS ─────────────────────────────────────────────────────────────────────
 function useWidth() {
-
-  const [w, setW] = React.useState(window.innerWidth);
-
-  React.useEffect(() => {
-
-    const h = () => setW(window.innerWidth);
-
-    window.addEventListener("resize", h);
-
-    return () => window.removeEventListener("resize", h);
-
-  }, []);
-
-  return w;
-
+const [w, setW] = React.useState(window.innerWidth);
+React.useEffect(() => {
+const h = () => setW(window.innerWidth);
+window.addEventListener(“resize”, h);
+return () => window.removeEventListener(“resize”, h);
+}, []);
+return w;
 }
 
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// SHARED COMPONENTS
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-function Header({ name, pickedCount, onMenu, isMobile }) {
-
-  const pct = Math.round((pickedCount / TOTAL) * 100);
-
-  return (
-
-    <div style={{ background:"rgba(10,10,10,0.97)", borderBottom:"1px solid rgba(184,150,12,0.22)", padding:"0.7rem 1rem", display:"flex", alignItems:"center", justifyContent:"space-between", position:"sticky", top:0, zIndex:50 }}>
-
-      <div>
-
-        <div style={{ fontSize:"0.58rem", letterSpacing:"0.35em", color:"#8B6914", textTransform:"uppercase" }}>🏆 Oscar Ballot 2026</div>
-
-        <div style={{ color:"#F5D060", fontSize:"0.85rem", marginTop:2 }}>{name}</div>
-
-      </div>
-
-      <div style={{ display:"flex", alignItems:"center", gap:"0.75rem" }}>
-
-        <div style={{ textAlign:"right" }}>
-
-          <div style={{ fontSize:"0.62rem", color:"#555", marginBottom:3 }}>{pickedCount}/{TOTAL}</div>
-
-          <div style={{ width:72, height:3, background:"rgba(255,255,255,0.08)", borderRadius:2 }}>
-
-            <div style={{ width:`${pct}%`, height:"100%", background:gold, borderRadius:2, transition:"width 0.4s" }} />
-
-          </div>
-
-        </div>
-
-        {isMobile && onMenu && (
-
-          <button onClick={onMenu} style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(184,150,12,0.25)", borderRadius:5, padding:"0.4rem 0.65rem", cursor:"pointer", color:"#C9A227", fontSize:"1.1rem", lineHeight:1 }}>☰</button>
-
-        )}
-
-      </div>
-
-    </div>
-
-  );
-
+// picks shape: { [catId]: { willWin: string|null, shouldWin: string|null } }
+function emptyPick() { return { willWin: null, shouldWin: null }; }
+function getPick(picks, catId) { return picks[catId] || emptyPick(); }
+function setCatPick(picks, catId, type, nominee) {
+const cur = getPick(picks, catId);
+return { …picks, [catId]: { …cur, [type]: nominee } };
+}
+function countPicked(picks) {
+return CATEGORIES.filter(c => {
+const p = getPick(picks, c.id);
+return p.willWin || p.shouldWin;
+}).length;
+}
+function countComplete(picks) {
+return CATEGORIES.filter(c => {
+const p = getPick(picks, c.id);
+return p.willWin && p.shouldWin;
+}).length;
 }
 
+// ── SHARED UI ─────────────────────────────────────────────────────────────────
+function Header({ name, picks, isMobile, onMenu }) {
+const started = countPicked(picks);
+const complete = countComplete(picks);
+const pct = Math.round((complete / TOTAL) * 100);
+return (
+<div style={{ background: C.bgDeep, borderBottom: `2px solid ${C.borderGold}`, padding: “0.7rem 1rem”, display: “flex”, alignItems: “center”, justifyContent: “space-between”, position: “sticky”, top: 0, zIndex: 50, boxShadow: “0 2px 8px rgba(0,0,0,0.08)” }}>
+<div>
+<div style={{ fontSize: “0.58rem”, letterSpacing: “0.35em”, color: C.gold, textTransform: “uppercase” }}>🏆 Oscar Ballot 2026</div>
+<div style={{ color: C.text, fontSize: “0.85rem”, fontWeight: “bold”, marginTop: 2 }}>{name}</div>
+</div>
+<div style={{ display: “flex”, alignItems: “center”, gap: “0.75rem” }}>
+<div style={{ textAlign: “right” }}>
+<div style={{ fontSize: “0.6rem”, color: C.textLight, marginBottom: 3 }}>
+{complete} complete · {started - complete > 0 ? `${started - complete} partial` : “”}
+</div>
+<div style={{ width: 80, height: 4, background: C.border, borderRadius: 2 }}>
+<div style={{ width: `${pct}%`, height: “100%”, background: goldGrad, borderRadius: 2, transition: “width 0.4s” }} />
+</div>
+</div>
+{isMobile && onMenu && (
+<button onClick={onMenu} style={{ background: C.bgCard, border: `1px solid ${C.borderGold}`, borderRadius: 5, padding: “0.4rem 0.65rem”, cursor: “pointer”, color: C.gold, fontSize: “1.1rem”, lineHeight: 1 }}>☰</button>
+)}
+</div>
+</div>
+);
+}
 
+function Legend() {
+return (
+<div style={{ display: “flex”, gap: “1rem”, marginBottom: “1rem”, flexWrap: “wrap” }}>
+<div style={{ display: “flex”, alignItems: “center”, gap: “0.4rem” }}>
+<div style={{ width: 12, height: 12, borderRadius: 2, background: C.willWinBg, border: `2px solid ${C.willWinBorder}` }} />
+<span style={{ fontSize: “0.72rem”, color: C.willWin, fontWeight: “bold” }}>Will Win</span>
+<span style={{ fontSize: “0.68rem”, color: C.textLight }}>— your prediction</span>
+</div>
+<div style={{ display: “flex”, alignItems: “center”, gap: “0.4rem” }}>
+<div style={{ width: 12, height: 12, borderRadius: 2, background: C.shouldWinBg, border: `2px solid ${C.shouldWinBorder}` }} />
+<span style={{ fontSize: “0.72rem”, color: C.shouldWin, fontWeight: “bold” }}>Should Win</span>
+<span style={{ fontSize: “0.68rem”, color: C.textLight }}>— your preference</span>
+</div>
+</div>
+);
+}
+
+function NomineeButton({ nominee, willSelected, shouldSelected, onWill, onShould }) {
+const isWill   = willSelected === nominee;
+const isShould = shouldSelected === nominee;
+const isBoth   = isWill && isShould;
+
+let bg = C.bgCard, border = C.border, textColor = C.text;
+if (isBoth) { bg = “#EEF4F0”; border = C.borderGold; }
+else if (isWill)   { bg = C.willWinBg;   border = C.willWinBorder; }
+else if (isShould) { bg = C.shouldWinBg; border = C.shouldWinBorder; }
+
+return (
+<div style={{ background: bg, border: `1.5px solid ${border}`, borderRadius: 8, padding: “0.75rem 1rem”, transition: “all 0.15s” }}>
+<div style={{ color: textColor, fontSize: “0.88rem”, lineHeight: 1.4, marginBottom: “0.6rem” }}>{nominee}</div>
+<div style={{ display: “flex”, gap: “0.5rem” }}>
+<button
+onClick={onWill}
+style={{
+flex: 1, padding: “0.35rem 0.5rem”, borderRadius: 5, border: `1.5px solid ${isWill ? C.willWin : C.border}`,
+background: isWill ? C.willWin : “transparent”, color: isWill ? “#fff” : C.willWin,
+fontSize: “0.7rem”, fontWeight: “bold”, cursor: “pointer”, fontFamily: ff,
+letterSpacing: “0.05em”, transition: “all 0.15s”,
+}}
+>
+{isWill ? “✓ Will Win” : “Will Win”}
+</button>
+<button
+onClick={onShould}
+style={{
+flex: 1, padding: “0.35rem 0.5rem”, borderRadius: 5, border: `1.5px solid ${isShould ? C.shouldWin : C.border}`,
+background: isShould ? C.shouldWin : “transparent”, color: isShould ? “#fff” : C.shouldWin,
+fontSize: “0.7rem”, fontWeight: “bold”, cursor: “pointer”, fontFamily: ff,
+letterSpacing: “0.05em”, transition: “all 0.15s”,
+}}
+>
+{isShould ? “✓ Should Win” : “Should Win”}
+</button>
+</div>
+</div>
+);
+}
 
 function CategoryList({ picks, activeCategory, onSelect }) {
-
-  return CATEGORIES.map((c, i) => {
-
-    const picked = !!picks[c.id], isActive = i === activeCategory;
-
-    return (
-
-      <button key={c.id} onClick={() => onSelect(i)} style={{ padding:"0.65rem 1rem", background:isActive?"rgba(184,150,12,0.12)":"transparent", border:"none", borderLeft:isActive?"2px solid #C9A227":"2px solid transparent", textAlign:"left", cursor:"pointer", color:isActive?"#F5D060":picked?"#888":"#4A4A4A", fontSize:"0.73rem", lineHeight:1.3, fontFamily:ff, display:"flex", alignItems:"center", gap:"0.55rem", width:"100%", borderBottom:"1px solid rgba(255,255,255,0.03)" }}>
-
-        <span style={{ fontSize:"0.95rem", flexShrink:0 }}>{c.icon}</span>
-
-        <span style={{ flex:1, textAlign:"left" }}>{c.name.replace(" ✦ NEW","")}{c.name.includes("NEW")?" ✦":""}</span>
-
-        {picked && <span style={{ color:"#C9A227", fontSize:"0.85rem", flexShrink:0 }}>✓</span>}
-
-      </button>
-
-    );
-
-  });
-
+return CATEGORIES.map((c, i) => {
+const p = getPick(picks, c.id);
+const complete = p.willWin && p.shouldWin;
+const partial  = (p.willWin || p.shouldWin) && !complete;
+const isActive = i === activeCategory;
+return (
+<button key={c.id} onClick={() => onSelect(i)} style={{
+padding: “0.6rem 1rem”, background: isActive ? “#EDE0C0” : “transparent”,
+border: “none”, borderLeft: isActive ? `3px solid ${C.borderGold}` : “3px solid transparent”,
+textAlign: “left”, cursor: “pointer”,
+color: isActive ? C.text : complete ? C.textMid : partial ? C.textMid : C.textLight,
+fontSize: “0.72rem”, lineHeight: 1.3, fontFamily: ff,
+display: “flex”, alignItems: “center”, gap: “0.5rem”, width: “100%”,
+borderBottom: `1px solid ${C.border}`,
+}}>
+<span style={{ fontSize: “0.9rem”, flexShrink: 0 }}>{c.icon}</span>
+<span style={{ flex: 1 }}>{c.name.replace(” ✦ NEW”,””)}{c.name.includes(“NEW”) ? “ ✦” : “”}</span>
+{complete && <span style={{ color: C.gold, fontSize: “0.8rem”, flexShrink: 0 }}>✓</span>}
+{partial  && <span style={{ color: C.borderGold, fontSize: “0.7rem”, flexShrink: 0 }}>½</span>}
+</button>
+);
+});
 }
 
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// SCREENS
-
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ── INTRO ─────────────────────────────────────────────────────────────────────
 function IntroScreen({ name, setName, onStart, subCount, onViewSubs }) {
+return (
+<div style={{ minHeight: “100vh”, background: C.bg, display: “flex”, flexDirection: “column”, alignItems: “center”, justifyContent: “center”, padding: “1.5rem”, position: “relative”, overflow: “hidden” }}>
+<div style={{ position: “absolute”, inset: 0, backgroundImage: `radial-gradient(circle at 30% 50%, rgba(184,150,12,0.07) 0%, transparent 55%), radial-gradient(circle at 70% 20%, rgba(184,150,12,0.05) 0%, transparent 45%)`, pointerEvents: “none” }} />
+<div style={{ textAlign: “center”, width: “100%”, maxWidth: 480, position: “relative”, zIndex: 1 }}>
+<div style={{ fontSize: “3.5rem”, marginBottom: “0.4rem”, filter: “drop-shadow(0 2px 8px rgba(184,150,12,0.4))” }}>🏆</div>
+<div style={{ fontSize: “0.62rem”, letterSpacing: “0.45em”, color: C.gold, marginBottom: “0.4rem”, textTransform: “uppercase” }}>The 98th Academy Awards</div>
+<h1 style={{ fontSize: “clamp(2rem,9vw,3rem)”, fontWeight: 400, margin: “0 0 0.2rem”, lineHeight: 1.1, background: goldGrad, WebkitBackgroundClip: “text”, WebkitTextFillColor: “transparent” }}>
+Oscar Predictions
+</h1>
+<div style={{ fontSize: “0.72rem”, letterSpacing: “0.25em”, color: C.textLight, marginBottom: “0.75rem”, textTransform: “uppercase” }}>March 15, 2026 · Dolby Theatre</div>
 
-  return (
-
-    <div style={{ minHeight:"100vh", background:bg, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem", position:"relative", overflow:"hidden" }}>
-
-      <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(circle at 25% 55%,rgba(184,150,12,0.08) 0%,transparent 55%),radial-gradient(circle at 75% 20%,rgba(184,150,12,0.06) 0%,transparent 45%)", pointerEvents:"none" }} />
-
-      <div style={{ textAlign:"center", width:"100%", maxWidth:460, position:"relative", zIndex:1 }}>
-
-        <div style={{ fontSize:"3.5rem", marginBottom:"0.4rem", filter:"drop-shadow(0 0 22px rgba(245,208,96,0.55))" }}>🏆</div>
-
-        <div style={{ fontSize:"0.62rem", letterSpacing:"0.4em", color:"#8B6914", marginBottom:"0.5rem", textTransform:"uppercase" }}>The 98th Academy Awards</div>
-
-        <h1 style={{ fontSize:"clamp(2rem,9vw,3rem)", fontWeight:400, margin:"0 0 0.2rem", lineHeight:1.1, background:gold, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Oscar Predictions</h1>
-
-        <div style={{ fontSize:"0.72rem", letterSpacing:"0.25em", color:"#555", marginBottom:"1.75rem", textTransform:"uppercase" }}>March 15, 2026 · Dolby Theatre</div>
-
-        <p style={{ color:"#777", fontSize:"0.92rem", lineHeight:1.75, marginBottom:"1.75rem" }}>
-
-          Pick your winners across all <strong style={{ color:"#C9A227" }}>24 categories</strong> before the ceremony. Lock in your ballot and see how you compare.
-
-        </p>
-
-        <input
-
-          type="text" placeholder="Your name" value={name}
-
-          onChange={e => setName(e.target.value)}
-
-          onKeyDown={e => e.key === "Enter" && name.trim() && onStart()}
-
-          style={{ width:"100%", padding:"0.9rem 1.2rem", background:"rgba(255,255,255,0.04)", border:"1px solid rgba(184,150,12,0.3)", borderRadius:6, color:"#F5D060", fontSize:"1rem", outline:"none", marginBottom:"0.7rem" }}
-
-        />
-
-        <button disabled={!name.trim()} onClick={onStart} style={{ width:"100%", padding:"1rem", background:name.trim()?gold:"rgba(255,255,255,0.05)", border:"none", borderRadius:6, color:name.trim()?"#0A0A0A":"#444", fontSize:"0.9rem", letterSpacing:"0.12em", textTransform:"uppercase", fontWeight:700, cursor:name.trim()?"pointer":"not-allowed", marginBottom:"0.7rem" }}>
-
-          Enter the Ballot →
-
-        </button>
-
-        {subCount > 0 && (
-
-          <button onClick={onViewSubs} style={{ width:"100%", padding:"0.75rem", background:"transparent", border:"1px solid rgba(255,255,255,0.1)", borderRadius:6, color:"#666", fontSize:"0.78rem", letterSpacing:"0.12em", textTransform:"uppercase", cursor:"pointer" }}>
-
-            View {subCount} submission{subCount !== 1 ? "s" : ""}
-
-          </button>
-
-        )}
-
+```
+    <div style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 8, padding: "1rem", marginBottom: "1.5rem", display: "flex", gap: "1.5rem", justifyContent: "center" }}>
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: "0.65rem", color: C.textLight, marginBottom: 2 }}>Categories</div>
+        <div style={{ fontSize: "1.2rem", fontWeight: "bold", color: C.gold }}>24</div>
       </div>
-
+      <div style={{ width: 1, background: C.border }} />
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: "0.65rem", color: C.willWin, fontWeight: "bold", marginBottom: 2 }}>Will Win</div>
+        <div style={{ fontSize: "0.65rem", color: C.textLight }}>Your prediction</div>
+      </div>
+      <div style={{ width: 1, background: C.border }} />
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: "0.65rem", color: C.shouldWin, fontWeight: "bold", marginBottom: 2 }}>Should Win</div>
+        <div style={{ fontSize: "0.65rem", color: C.textLight }}>Your preference</div>
+      </div>
     </div>
 
-  );
+    <p style={{ color: C.textMid, fontSize: "0.9rem", lineHeight: 1.75, marginBottom: "1.5rem" }}>
+      For each category, pick who you think <strong style={{ color: C.willWin }}>will win</strong> and who you think <strong style={{ color: C.shouldWin }}>should win</strong>. They can be the same — or tell a completely different story.
+    </p>
+    <input
+      type="text" placeholder="Your name" value={name}
+      onChange={e => setName(e.target.value)}
+      onKeyDown={e => e.key === "Enter" && name.trim() && onStart()}
+      style={{ width: "100%", padding: "0.9rem 1.2rem", background: C.bgCard, border: `1.5px solid ${C.border}`, borderRadius: 6, color: C.text, fontSize: "1rem", outline: "none", marginBottom: "0.7rem" }}
+    />
+    <button disabled={!name.trim()} onClick={onStart} style={{ width: "100%", padding: "1rem", background: name.trim() ? goldGrad : C.border, border: "none", borderRadius: 6, color: name.trim() ? "#1A1208" : C.textLight, fontSize: "0.9rem", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, cursor: name.trim() ? "pointer" : "not-allowed", marginBottom: "0.7rem" }}>
+      Enter the Ballot →
+    </button>
+    {subCount > 0 && (
+      <button onClick={onViewSubs} style={{ width: "100%", padding: "0.75rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>
+        View {subCount} submission{subCount !== 1 ? "s" : ""}
+      </button>
+    )}
+  </div>
+</div>
+```
 
+);
 }
 
-
-
+// ── BALLOT ────────────────────────────────────────────────────────────────────
 function BallotScreen({ name, picks, setPicks, onReview }) {
+const isMobile = useWidth() < 680;
+const [activeCat, setActiveCat] = React.useState(0);
+const [animating, setAnimating] = React.useState(false);
+const [drawerOpen, setDrawerOpen] = React.useState(false);
+const complete = countComplete(picks);
+const cat = CATEGORIES[activeCat];
+const catPick = getPick(picks, cat.id);
 
-  const isMobile = useWidth() < 680;
+function goTo(idx) {
+if (idx < 0 || idx >= TOTAL) return;
+setAnimating(true); setDrawerOpen(false);
+setTimeout(() => { setActiveCat(idx); setAnimating(false); }, 130);
+}
+function setType(type, nominee) {
+// toggle off if same
+const cur = getPick(picks, cat.id)[type];
+setPicks(p => setCatPick(p, cat.id, type, cur === nominee ? null : nominee));
+}
 
-  const [activeCat, setActiveCat] = React.useState(0);
+return (
+<div style={{ minHeight: “100vh”, background: C.bg, display: “flex”, flexDirection: “column” }}>
+<Header name={name} picks={picks} isMobile={isMobile} onMenu={() => setDrawerOpen(o => !o)} />
 
-  const [animating, setAnimating] = React.useState(false);
+```
+  <div style={{ display: "flex", flex: 1, overflow: "hidden", position: "relative" }}>
+    {!isMobile && (
+      <div style={{ width: 220, borderRight: `1px solid ${C.border}`, overflowY: "auto", flexShrink: 0, background: C.bgDeep }}>
+        <CategoryList picks={picks} activeCategory={activeCat} onSelect={goTo} />
+      </div>
+    )}
 
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-
-  const pickedCount = Object.keys(picks).length;
-
-  const cat = CATEGORIES[activeCat];
-
-  const currentPick = picks[cat.id];
-
-
-
-  function goTo(idx) {
-
-    if (idx < 0 || idx >= TOTAL) return;
-
-    setAnimating(true); setDrawerOpen(false);
-
-    setTimeout(() => { setActiveCat(idx); setAnimating(false); }, 130);
-
-  }
-
-
-
-  return (
-
-    <div style={{ minHeight:"100vh", background:bg, display:"flex", flexDirection:"column" }}>
-
-      <Header name={name} pickedCount={pickedCount} isMobile={isMobile} onMenu={() => setDrawerOpen(o => !o)} />
-
-
-
-      <div style={{ display:"flex", flex:1, overflow:"hidden", position:"relative" }}>
-
-        {/* Desktop sidebar */}
-
-        {!isMobile && (
-
-          <div style={{ width:215, borderRight:"1px solid rgba(184,150,12,0.1)", overflowY:"auto", flexShrink:0 }}>
-
+    {isMobile && drawerOpen && (
+      <>
+        <div onClick={() => setDrawerOpen(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.35)", zIndex: 40 }} />
+        <div style={{ position: "fixed", top: 0, right: 0, bottom: 0, width: "78%", maxWidth: 290, background: C.bgDeep, zIndex: 50, overflowY: "auto", borderLeft: `2px solid ${C.borderGold}`, display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "0.9rem 1rem", borderBottom: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
+            <span style={{ color: C.gold, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>All Categories</span>
+            <button onClick={() => setDrawerOpen(false)} style={{ background: "none", border: "none", color: C.textLight, fontSize: "1.2rem", cursor: "pointer", padding: 0 }}>✕</button>
+          </div>
+          <div style={{ overflowY: "auto", flex: 1 }}>
             <CategoryList picks={picks} activeCategory={activeCat} onSelect={goTo} />
-
           </div>
+        </div>
+      </>
+    )}
 
-        )}
-
-
-
-        {/* Mobile drawer */}
-
-        {isMobile && drawerOpen && (
-
-          <>
-
-            <div onClick={() => setDrawerOpen(false)} style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.75)", zIndex:40 }} />
-
-            <div style={{ position:"fixed", top:0, right:0, bottom:0, width:"78%", maxWidth:290, background:"#111", zIndex:50, overflowY:"auto", borderLeft:"1px solid rgba(184,150,12,0.2)", display:"flex", flexDirection:"column" }}>
-
-              <div style={{ padding:"0.9rem 1rem", borderBottom:"1px solid rgba(184,150,12,0.15)", display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
-
-                <span style={{ color:"#C9A227", fontSize:"0.7rem", letterSpacing:"0.2em", textTransform:"uppercase" }}>All Categories</span>
-
-                <button onClick={() => setDrawerOpen(false)} style={{ background:"none", border:"none", color:"#666", fontSize:"1.2rem", cursor:"pointer", padding:0, lineHeight:1 }}>✕</button>
-
-              </div>
-
-              <div style={{ overflowY:"auto", flex:1 }}>
-
-                <CategoryList picks={picks} activeCategory={activeCat} onSelect={goTo} />
-
-              </div>
-
-            </div>
-
-          </>
-
-        )}
-
-
-
-        {/* Main panel */}
-
-        <div style={{ flex:1, overflowY:"auto", padding:isMobile?"1.25rem 1rem 5rem":"2rem 2.5rem" }}>
-
-          <div style={{ maxWidth:580, margin:"0 auto", opacity:animating?0:1, transition:"opacity 0.13s" }}>
-
-            <div style={{ marginBottom:"1.4rem" }}>
-
-              <div style={{ fontSize:"1.75rem", marginBottom:"0.25rem" }}>{cat.icon}</div>
-
-              <div style={{ fontSize:"0.58rem", letterSpacing:"0.3em", color:"#8B6914", textTransform:"uppercase", marginBottom:"0.2rem" }}>Category {activeCat + 1} of {TOTAL}</div>
-
-              <h2 style={{ margin:0, fontSize:isMobile?"1.25rem":"1.55rem", fontWeight:400, background:gold, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{cat.name}</h2>
-
-              {cat.name.includes("NEW") && <span style={{ display:"inline-block", marginTop:"0.35rem", fontSize:"0.58rem", letterSpacing:"0.2em", color:"#0A0A0A", background:gold, padding:"2px 8px", borderRadius:2, textTransform:"uppercase" }}>First Time Category!</span>}
-
-            </div>
-
-
-
-            <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-
-              {cat.nominees.map(nominee => {
-
-                const sel = currentPick === nominee;
-
-                return (
-
-                  <button key={nominee} onClick={() => setPicks(p => ({ ...p, [cat.id]: nominee }))} style={{ padding:isMobile?"0.85rem 1rem":"0.95rem 1.2rem", background:sel?"rgba(184,150,12,0.12)":"rgba(255,255,255,0.025)", border:`1px solid ${sel?"rgba(245,208,96,0.45)":"rgba(255,255,255,0.07)"}`, borderRadius:6, textAlign:"left", cursor:"pointer", color:sel?"#F5D060":"#888", fontSize:isMobile?"0.85rem":"0.9rem", fontFamily:ff, lineHeight:1.45, display:"flex", alignItems:"center", gap:"0.85rem" }}>
-
-                    <div style={{ width:18, height:18, borderRadius:"50%", border:`2px solid ${sel?"#C9A227":"#3A3A3A"}`, background:sel?gold:"transparent", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.58rem", color:"#0A0A0A" }}>{sel && "✓"}</div>
-
-                    <span style={{ flex:1 }}>{nominee}</span>
-
-                  </button>
-
-                );
-
-              })}
-
-            </div>
-
-
-
-            <div style={{ display:"flex", gap:"0.65rem", marginTop:"1.75rem" }}>
-
-              <button onClick={() => goTo(activeCat - 1)} disabled={activeCat === 0} style={{ padding:"0.75rem 1.1rem", background:"transparent", border:"1px solid rgba(255,255,255,0.09)", borderRadius:6, color:activeCat===0?"#2A2A2A":"#666", fontSize:"0.78rem", cursor:activeCat===0?"not-allowed":"pointer", fontFamily:ff }}>← Prev</button>
-
-              {activeCat < TOTAL - 1
-
-                ? <button onClick={() => goTo(activeCat + 1)} style={{ flex:1, padding:"0.75rem", background:currentPick?gold:"rgba(255,255,255,0.04)", border:"none", borderRadius:6, color:currentPick?"#0A0A0A":"#555", fontSize:"0.8rem", cursor:"pointer", fontFamily:ff, fontWeight:currentPick?700:400 }}>Next →</button>
-
-                : <button onClick={onReview} style={{ flex:1, padding:"0.75rem", background:gold, border:"none", borderRadius:6, color:"#0A0A0A", fontSize:"0.8rem", cursor:"pointer", fontFamily:ff, fontWeight:700 }}>Review Ballot →</button>
-
-              }
-
-            </div>
-
-          </div>
-
+    <div style={{ flex: 1, overflowY: "auto", padding: isMobile ? "1.25rem 1rem 5rem" : "2rem 2.5rem" }}>
+      <div style={{ maxWidth: 580, margin: "0 auto", opacity: animating ? 0 : 1, transition: "opacity 0.13s" }}>
+        <div style={{ marginBottom: "1.25rem" }}>
+          <div style={{ fontSize: "1.6rem", marginBottom: "0.2rem" }}>{cat.icon}</div>
+          <div style={{ fontSize: "0.58rem", letterSpacing: "0.3em", color: C.gold, textTransform: "uppercase", marginBottom: "0.2rem" }}>Category {activeCat + 1} of {TOTAL}</div>
+          <h2 style={{ margin: "0 0 0.15rem", fontSize: isMobile ? "1.2rem" : "1.5rem", fontWeight: 400, color: C.text }}>{cat.name}</h2>
+          {cat.name.includes("NEW") && <span style={{ display: "inline-block", fontSize: "0.58rem", letterSpacing: "0.2em", color: "#fff", background: C.gold, padding: "2px 8px", borderRadius: 2, textTransform: "uppercase" }}>First Time Category!</span>}
         </div>
 
+        <Legend />
+
+        {/* Current picks summary */}
+        {(catPick.willWin || catPick.shouldWin) && (
+          <div style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 6, padding: "0.6rem 0.9rem", marginBottom: "0.9rem", fontSize: "0.75rem" }}>
+            {catPick.willWin && <div><span style={{ color: C.willWin, fontWeight: "bold" }}>Will Win: </span><span style={{ color: C.text }}>{catPick.willWin.split(" — ")[0]}</span></div>}
+            {catPick.shouldWin && <div style={{ marginTop: catPick.willWin ? 3 : 0 }}><span style={{ color: C.shouldWin, fontWeight: "bold" }}>Should Win: </span><span style={{ color: C.text }}>{catPick.shouldWin.split(" — ")[0]}</span></div>}
+          </div>
+        )}
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+          {cat.nominees.map(nominee => (
+            <NomineeButton
+              key={nominee}
+              nominee={nominee}
+              willSelected={catPick.willWin}
+              shouldSelected={catPick.shouldWin}
+              onWill={() => setType("willWin", nominee)}
+              onShould={() => setType("shouldWin", nominee)}
+            />
+          ))}
+        </div>
+
+        <div style={{ display: "flex", gap: "0.65rem", marginTop: "1.75rem" }}>
+          <button onClick={() => goTo(activeCat - 1)} disabled={activeCat === 0} style={{ padding: "0.75rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: activeCat === 0 ? C.border : C.textMid, fontSize: "0.78rem", cursor: activeCat === 0 ? "not-allowed" : "pointer", fontFamily: ff }}>← Prev</button>
+          {activeCat < TOTAL - 1
+            ? <button onClick={() => goTo(activeCat + 1)} style={{ flex: 1, padding: "0.75rem", background: (catPick.willWin && catPick.shouldWin) ? goldGrad : C.bgDeep, border: `1px solid ${C.border}`, borderRadius: 6, color: (catPick.willWin && catPick.shouldWin) ? C.text : C.textMid, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: (catPick.willWin && catPick.shouldWin) ? 700 : 400 }}>Next →</button>
+            : <button onClick={onReview} style={{ flex: 1, padding: "0.75rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review Ballot →</button>
+          }
+        </div>
       </div>
-
-
-
-      {isMobile && pickedCount > 0 && (
-
-        <div style={{ position:"fixed", bottom:0, left:0, right:0, background:"rgba(10,10,10,0.97)", borderTop:"1px solid rgba(184,150,12,0.2)", padding:"0.7rem 1rem", display:"flex", alignItems:"center", justifyContent:"space-between", zIndex:30 }}>
-
-          <div style={{ color:"#555", fontSize:"0.72rem" }}>{pickedCount === TOTAL ? "🎉 All picked!" : `${TOTAL - pickedCount} left`}</div>
-
-          <button onClick={onReview} style={{ padding:"0.55rem 1.2rem", background:pickedCount===TOTAL?gold:"rgba(184,150,12,0.15)", border:pickedCount===TOTAL?"none":"1px solid rgba(184,150,12,0.3)", borderRadius:6, color:pickedCount===TOTAL?"#0A0A0A":"#C9A227", fontSize:"0.75rem", cursor:"pointer", fontFamily:ff, fontWeight:700 }}>Review & Submit →</button>
-
-        </div>
-
-      )}
-
     </div>
+  </div>
 
-  );
+  {isMobile && countPicked(picks) > 0 && (
+    <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: C.bgDeep, borderTop: `2px solid ${C.borderGold}`, padding: "0.7rem 1rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 30 }}>
+      <div style={{ fontSize: "0.72rem", color: C.textLight }}>{complete === TOTAL ? "🎉 All complete!" : `${complete}/${TOTAL} complete`}</div>
+      <button onClick={onReview} style={{ padding: "0.55rem 1.2rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.75rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review & Submit →</button>
+    </div>
+  )}
+</div>
+```
 
+);
 }
 
-
-
+// ── CONFIRM ───────────────────────────────────────────────────────────────────
 function ConfirmScreen({ name, picks, setPicks, onSubmit, onBack, saving }) {
+const isMobile = useWidth() < 680;
+const [editing, setEditing] = React.useState(false);
+const complete = countComplete(picks);
 
-  const isMobile = useWidth() < 680;
+if (editing) return <BallotScreen name={name} picks={picks} setPicks={setPicks} onReview={() => setEditing(false)} />;
 
-  const [editCat, setEditCat] = React.useState(null);
+return (
+<div style={{ minHeight: “100vh”, background: C.bg }}>
+<Header name={name} picks={picks} isMobile={false} />
+<div style={{ maxWidth: 700, margin: “0 auto”, padding: isMobile ? “1.25rem 1rem 6rem” : “2rem” }}>
+<div style={{ marginBottom: “1.4rem” }}>
+<div style={{ fontSize: “0.58rem”, letterSpacing: “0.3em”, color: C.gold, textTransform: “uppercase”, marginBottom: “0.35rem” }}>Review Ballot</div>
+<h2 style={{ margin: 0, fontSize: isMobile ? “1.4rem” : “1.9rem”, fontWeight: 400, color: C.text }}>{name}’s Picks</h2>
+<div style={{ color: C.textLight, fontSize: “0.75rem”, marginTop: “0.35rem” }}>{complete}/{TOTAL} fully complete</div>
+</div>
 
-  const pickedCount = Object.keys(picks).length;
-
-
-
-  if (editCat !== null) {
-
-    return <BallotScreen name={name} picks={picks} setPicks={setPicks} onReview={() => setEditCat(null)} />;
-
-  }
-
-
-
-  return (
-
-    <div style={{ minHeight:"100vh", background:bg }}>
-
-      <Header name={name} pickedCount={pickedCount} isMobile={false} />
-
-      <div style={{ maxWidth:680, margin:"0 auto", padding:isMobile?"1.25rem 1rem 6rem":"2rem" }}>
-
-        <div style={{ marginBottom:"1.4rem" }}>
-
-          <div style={{ fontSize:"0.58rem", letterSpacing:"0.3em", color:"#8B6914", textTransform:"uppercase", marginBottom:"0.35rem" }}>Review Ballot</div>
-
-          <h2 style={{ margin:0, fontSize:isMobile?"1.4rem":"1.9rem", fontWeight:400, background:gold, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{name}'s Picks</h2>
-
-          <div style={{ color:"#555", fontSize:"0.75rem", marginTop:"0.35rem" }}>{pickedCount}/{TOTAL} filled{pickedCount < TOTAL && <span style={{ color:"#888" }}> · {TOTAL - pickedCount} blank</span>}</div>
-
-        </div>
-
-        <div style={{ display:"flex", flexDirection:"column", gap:"0.4rem", marginBottom:"1.5rem" }}>
-
-          {CATEGORIES.map((c, i) => {
-
-            const p = picks[c.id];
-
-            return (
-
-              <div key={c.id} style={{ display:"flex", gap:"0.65rem", padding:"0.6rem 0.85rem", background:p?"rgba(255,255,255,0.02)":"rgba(255,40,40,0.035)", border:`1px solid ${p?"rgba(255,255,255,0.05)":"rgba(255,60,60,0.1)"}`, borderRadius:5, alignItems:"flex-start" }}>
-
-                <div style={{ color:"#555", fontSize:"0.68rem", lineHeight:1.4, minWidth:isMobile?85:165, flexShrink:0 }}>{c.name.replace(" ✦ NEW","")}</div>
-
-                <div style={{ color:p?"#C9A227":"#2E2E2E", fontSize:"0.78rem", flex:1, lineHeight:1.4 }}>{p || <em style={{ color:"#333" }}>not picked</em>}</div>
-
-                <button onClick={() => { setEditCat(i); }} style={{ background:"transparent", border:"none", color:"#555", cursor:"pointer", fontSize:"0.68rem", padding:0, fontFamily:ff, flexShrink:0 }}>edit</button>
-
-              </div>
-
-            );
-
-          })}
-
-        </div>
-
-      </div>
-
-      <div style={{ position:"fixed", bottom:0, left:0, right:0, background:"rgba(10,10,10,0.97)", borderTop:"1px solid rgba(184,150,12,0.2)", padding:"0.75rem 1rem", display:"flex", gap:"0.65rem", zIndex:30 }}>
-
-        <button onClick={onBack} style={{ padding:"0.85rem 1.1rem", background:"transparent", border:"1px solid rgba(255,255,255,0.1)", borderRadius:6, color:"#666", fontSize:"0.78rem", cursor:"pointer", fontFamily:ff, whiteSpace:"nowrap" }}>← Back</button>
-
-        <button onClick={onSubmit} disabled={saving} style={{ flex:1, padding:"0.85rem", background:gold, border:"none", borderRadius:6, color:"#0A0A0A", fontSize:"0.85rem", cursor:"pointer", fontFamily:ff, fontWeight:700, opacity:saving?0.7:1 }}>
-
-          {saving ? "Submitting…" : "🏆 Submit My Ballot"}
-
-        </button>
-
-      </div>
-
+```
+    {/* Column headers */}
+    <div style={{ display: "flex", gap: "0.5rem", padding: "0.4rem 0.85rem", marginBottom: "0.3rem" }}>
+      <div style={{ minWidth: isMobile ? 85 : 165, flexShrink: 0 }} />
+      <div style={{ flex: 1, fontSize: "0.65rem", fontWeight: "bold", color: C.willWin, textTransform: "uppercase", letterSpacing: "0.1em" }}>Will Win</div>
+      <div style={{ flex: 1, fontSize: "0.65rem", fontWeight: "bold", color: C.shouldWin, textTransform: "uppercase", letterSpacing: "0.1em" }}>Should Win</div>
+      <div style={{ width: 28 }} />
     </div>
 
-  );
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", marginBottom: "1.5rem" }}>
+      {CATEGORIES.map((c, i) => {
+        const p = getPick(picks, c.id);
+        const anyPick = p.willWin || p.shouldWin;
+        return (
+          <div key={c.id} style={{ display: "flex", gap: "0.5rem", padding: "0.55rem 0.85rem", background: anyPick ? C.bgCard : "#FFF8F5", border: `1px solid ${anyPick ? C.border : "#DDBBAA"}`, borderRadius: 5, alignItems: "flex-start" }}>
+            <div style={{ color: C.textLight, fontSize: "0.67rem", lineHeight: 1.4, minWidth: isMobile ? 85 : 165, flexShrink: 0, paddingTop: 1 }}>{c.name.replace(" ✦ NEW","")}</div>
+            <div style={{ flex: 1, color: p.willWin ? C.willWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.willWin ? p.willWin.split(" — ")[0] : <em style={{ color: C.border }}>—</em>}</div>
+            <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.shouldWin ? p.shouldWin.split(" — ")[0] : <em style={{ color: C.border }}>—</em>}</div>
+            <button onClick={() => setEditing(true)} style={{ background: "transparent", border: "none", color: C.textLight, cursor: "pointer", fontSize: "0.65rem", padding: 0, fontFamily: ff, flexShrink: 0, width: 28, textAlign: "right" }}>edit</button>
+          </div>
+        );
+      })}
+    </div>
+  </div>
 
+  <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: C.bgDeep, borderTop: `2px solid ${C.borderGold}`, padding: "0.75rem 1rem", display: "flex", gap: "0.65rem", zIndex: 30, boxShadow: "0 -2px 10px rgba(0,0,0,0.08)" }}>
+    <button onClick={onBack} style={{ padding: "0.85rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", cursor: "pointer", fontFamily: ff, whiteSpace: "nowrap" }}>← Back</button>
+    <button onClick={onSubmit} disabled={saving} style={{ flex: 1, padding: "0.85rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.85rem", cursor: "pointer", fontFamily: ff, fontWeight: 700, opacity: saving ? 0.7 : 1 }}>
+      {saving ? "Submitting…" : "🏆 Submit My Ballot"}
+    </button>
+  </div>
+</div>
+```
+
+);
 }
 
-
-
+// ── SUCCESS ───────────────────────────────────────────────────────────────────
 function SuccessScreen({ name, onViewSubs, onReset }) {
-
-  return (
-
-    <div style={{ minHeight:"100vh", background:bg, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem", textAlign:"center" }}>
-
-      <div style={{ fontSize:"4.5rem", marginBottom:"0.75rem", filter:"drop-shadow(0 0 28px rgba(245,208,96,0.65))" }}>🏆</div>
-
-      <div style={{ fontSize:"0.6rem", letterSpacing:"0.4em", color:"#8B6914", marginBottom:"0.55rem", textTransform:"uppercase" }}>Ballot Submitted</div>
-
-      <h2 style={{ fontSize:"clamp(1.5rem,6vw,2.2rem)", fontWeight:400, background:gold, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", margin:"0 0 1rem" }}>Good luck, {name}!</h2>
-
-      <p style={{ color:"#666", maxWidth:340, lineHeight:1.75, marginBottom:"2rem", fontSize:"0.88rem" }}>
-
-        Your ballot is saved. Tune in <strong style={{ color:"#888" }}>Sunday March 15</strong> on ABC at 7:00 PM ET.
-
-      </p>
-
-      <div style={{ display:"flex", flexDirection:"column", gap:"0.7rem", width:"100%", maxWidth:340 }}>
-
-        <button onClick={onViewSubs} style={{ padding:"1rem", background:gold, border:"none", borderRadius:6, color:"#0A0A0A", fontSize:"0.85rem", cursor:"pointer", fontFamily:ff, fontWeight:700 }}>See All Submissions</button>
-
-        <button onClick={onReset} style={{ padding:"0.9rem", background:"transparent", border:"1px solid rgba(184,150,12,0.3)", borderRadius:6, color:"#C9A227", fontSize:"0.85rem", cursor:"pointer", fontFamily:ff }}>Submit Another Ballot</button>
-
-      </div>
-
-    </div>
-
-  );
-
+return (
+<div style={{ minHeight: “100vh”, background: C.bg, display: “flex”, flexDirection: “column”, alignItems: “center”, justifyContent: “center”, padding: “1.5rem”, textAlign: “center” }}>
+<div style={{ fontSize: “4.5rem”, marginBottom: “0.75rem”, filter: “drop-shadow(0 2px 12px rgba(184,150,12,0.4))” }}>🏆</div>
+<div style={{ fontSize: “0.6rem”, letterSpacing: “0.4em”, color: C.gold, marginBottom: “0.55rem”, textTransform: “uppercase” }}>Ballot Submitted</div>
+<h2 style={{ fontSize: “clamp(1.5rem,6vw,2.2rem)”, fontWeight: 400, color: C.text, margin: “0 0 1rem” }}>Good luck, {name}!</h2>
+<p style={{ color: C.textMid, maxWidth: 340, lineHeight: 1.75, marginBottom: “2rem”, fontSize: “0.88rem” }}>
+Your ballot is saved. Tune in <strong>Sunday March 15</strong> on ABC at 7:00 PM ET to see how your picks hold up.
+</p>
+<div style={{ display: “flex”, flexDirection: “column”, gap: “0.7rem”, width: “100%”, maxWidth: 340 }}>
+<button onClick={onViewSubs} style={{ padding: “1rem”, background: goldGrad, border: “none”, borderRadius: 6, color: C.text, fontSize: “0.85rem”, cursor: “pointer”, fontFamily: ff, fontWeight: 700 }}>See All Submissions</button>
+<button onClick={onReset} style={{ padding: “0.9rem”, background: “transparent”, border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: “0.85rem”, cursor: “pointer”, fontFamily: ff }}>Submit Another Ballot</button>
+</div>
+</div>
+);
 }
 
-
-
+// ── LEADERBOARD ───────────────────────────────────────────────────────────────
 function LeaderboardScreen({ subs, onBack }) {
+const isMobile = useWidth() < 680;
+const [expanded, setExpanded] = React.useState(null);
 
-  const isMobile = useWidth() < 680;
+return (
+<div style={{ minHeight: “100vh”, background: C.bg, padding: isMobile ? “1.25rem 1rem” : “2rem”, maxWidth: 720, margin: “0 auto” }}>
+<div style={{ display: “flex”, alignItems: “center”, justifyContent: “space-between”, marginBottom: “1.75rem” }}>
+<div>
+<div style={{ fontSize: “0.6rem”, letterSpacing: “0.3em”, color: C.gold, textTransform: “uppercase”, marginBottom: “0.35rem” }}>98th Academy Awards</div>
+<h2 style={{ margin: 0, fontSize: isMobile ? “1.4rem” : “1.8rem”, fontWeight: 400, color: C.text }}>Submissions</h2>
+</div>
+<button onClick={onBack} style={{ padding: “0.6rem 1rem”, background: “transparent”, border: `1.5px solid ${C.borderGold}`, borderRadius: 6, color: C.gold, fontSize: “0.75rem”, cursor: “pointer”, fontFamily: ff, whiteSpace: “nowrap” }}>+ Add Mine</button>
+</div>
 
-  const [expanded, setExpanded] = React.useState(null);
-
-  return (
-
-    <div style={{ minHeight:"100vh", background:bg, padding:isMobile?"1.25rem 1rem":"2rem", maxWidth:680, margin:"0 auto" }}>
-
-      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"1.75rem" }}>
-
-        <div>
-
-          <div style={{ fontSize:"0.6rem", letterSpacing:"0.3em", color:"#8B6914", textTransform:"uppercase", marginBottom:"0.35rem" }}>98th Academy Awards</div>
-
-          <h2 style={{ margin:0, fontSize:isMobile?"1.4rem":"1.8rem", fontWeight:400, background:gold, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Submissions</h2>
-
-        </div>
-
-        <button onClick={onBack} style={{ padding:"0.6rem 1rem", background:"transparent", border:"1px solid rgba(184,150,12,0.3)", borderRadius:6, color:"#C9A227", fontSize:"0.75rem", cursor:"pointer", fontFamily:ff, whiteSpace:"nowrap" }}>+ Add Mine</button>
-
-      </div>
-
-      {subs.length === 0 ? (
-
-        <div style={{ textAlign:"center", color:"#444", padding:"4rem 0" }}>
-
-          <div style={{ fontSize:"3rem", marginBottom:"1rem" }}>🎬</div>No submissions yet. Be the first!
-
-        </div>
-
-      ) : (
-
-        <div style={{ display:"flex", flexDirection:"column", gap:"0.9rem" }}>
-
-          {subs.map((s, i) => {
-
-            const open = expanded === i;
-
-            const cnt = Object.keys(s.picks || {}).length;
-
-            return (
-
-              <div key={s.id || i} style={{ background:"rgba(255,255,255,0.02)", border:"1px solid rgba(184,150,12,0.15)", borderRadius:8, overflow:"hidden" }}>
-
-                <button onClick={() => setExpanded(open ? null : i)} style={{ width:"100%", padding:"0.85rem 1rem", background:"rgba(184,150,12,0.05)", border:"none", display:"flex", alignItems:"center", justifyContent:"space-between", cursor:"pointer", fontFamily:ff, textAlign:"left" }}>
-
-                  <div>
-
-                    <div style={{ color:"#F5D060", fontSize:"0.95rem" }}>{s.name}</div>
-
-                    <div style={{ color:"#555", fontSize:"0.65rem", marginTop:2 }}>{cnt}/{TOTAL} picks · {new Date(s.submittedAt).toLocaleDateString()}</div>
-
-                  </div>
-
-                  <span style={{ color:"#8B6914", fontSize:"0.75rem" }}>{open ? "▲" : "▼"}</span>
-
-                </button>
-
-                {open && (
-
-                  <div style={{ padding:"0.85rem 1rem", display:"flex", flexDirection:"column", gap:"0.3rem" }}>
-
-                    {CATEGORIES.map(c => (
-
-                      <div key={c.id} style={{ display:"flex", gap:"0.5rem", fontSize:"0.72rem" }}>
-
-                        <span style={{ color:"#555", minWidth:isMobile?80:150, flexShrink:0 }}>{c.name.replace(" ✦ NEW","")}</span>
-
-                        <span style={{ color:s.picks?.[c.id]?"#A0832A":"#333" }}>{s.picks?.[c.id]?.split(" — ")[0] || "—"}</span>
-
-                      </div>
-
-                    ))}
-
-                  </div>
-
-                )}
-
-              </div>
-
-            );
-
-          })}
-
-        </div>
-
-      )}
-
+```
+  {subs.length === 0 ? (
+    <div style={{ textAlign: "center", color: C.textLight, padding: "4rem 0" }}>
+      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎬</div>No submissions yet. Be the first!
     </div>
+  ) : (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+      {subs.map((s, i) => {
+        const open = expanded === i;
+        const cnt = Object.keys(s.picks || {}).length;
+        return (
+          <div key={s.id || i} style={{ background: C.bgCard, border: `1.5px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
+            <button onClick={() => setExpanded(open ? null : i)} style={{ width: "100%", padding: "0.85rem 1rem", background: C.bgDeep, border: "none", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", fontFamily: ff, textAlign: "left" }}>
+              <div>
+                <div style={{ color: C.text, fontSize: "0.95rem", fontWeight: "bold" }}>{s.name}</div>
+                <div style={{ color: C.textLight, fontSize: "0.65rem", marginTop: 2 }}>{cnt}/{TOTAL} categories · {new Date(s.submittedAt).toLocaleDateString()}</div>
+              </div>
+              <span style={{ color: C.gold, fontSize: "0.75rem" }}>{open ? "▲" : "▼"}</span>
+            </button>
+            {open && (
+              <div style={{ padding: "0.85rem 1rem" }}>
+                <div style={{ display: "flex", gap: "0.5rem", padding: "0.3rem 0", marginBottom: "0.3rem", borderBottom: `1px solid ${C.border}` }}>
+                  <div style={{ minWidth: isMobile ? 80 : 150, flexShrink: 0 }} />
+                  <div style={{ flex: 1, fontSize: "0.62rem", fontWeight: "bold", color: C.willWin, textTransform: "uppercase" }}>Will Win</div>
+                  <div style={{ flex: 1, fontSize: "0.62rem", fontWeight: "bold", color: C.shouldWin, textTransform: "uppercase" }}>Should Win</div>
+                </div>
+                {CATEGORIES.map(c => {
+                  const p = getPick(s.picks || {}, c.id);
+                  return (
+                    <div key={c.id} style={{ display: "flex", gap: "0.5rem", padding: "0.25rem 0", borderBottom: `1px solid ${C.bgDeep}` }}>
+                      <div style={{ color: C.textLight, fontSize: "0.68rem", minWidth: isMobile ? 80 : 150, flexShrink: 0 }}>{c.name.replace(" ✦ NEW","")}</div>
+                      <div style={{ flex: 1, color: p.willWin ? C.willWin : C.border, fontSize: "0.72rem" }}>{p.willWin ? p.willWin.split(" — ")[0] : "—"}</div>
+                      <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : C.border, fontSize: "0.72rem" }}>{p.shouldWin ? p.shouldWin.split(" — ")[0] : "—"}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  )}
+</div>
+```
 
-  );
-
+);
 }
 
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// ROOT APP
-
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ── ROOT ──────────────────────────────────────────────────────────────────────
 function App() {
+const [step, setStep]   = React.useState(“intro”);
+const [name, setName]   = React.useState(””);
+const [picks, setPicks] = React.useState({});
+const [subs, setSubs]   = React.useState([]);
+const [saving, setSaving] = React.useState(false);
 
-  const [step, setStep]   = React.useState("intro");
+React.useEffect(() => { loadSubs().then(setSubs); }, []);
 
-  const [name, setName]   = React.useState("");
-
-  const [picks, setPicks] = React.useState({});
-
-  const [subs, setSubs]   = React.useState([]);
-
-  const [saving, setSaving] = React.useState(false);
-
-
-
-  React.useEffect(() => { loadSubs().then(setSubs); }, []);
-
-
-
-  async function submit() {
-
-    setSaving(true);
-
-    await saveSub({ name: name.trim(), picks, submittedAt: new Date().toISOString(), id: Math.random().toString(36).slice(2) });
-
-    const updated = await loadSubs();
-
-    setSubs(updated);
-
-    setSaving(false);
-
-    setStep("success");
-
-  }
-
-
-
-  function reset() { setName(""); setPicks({}); setStep("intro"); }
-
-
-
-  async function goToLeaderboard() { const s = await loadSubs(); setSubs(s); setStep("leaderboard"); }
-
-
-
-  if (step === "intro")       return <IntroScreen name={name} setName={setName} onStart={() => setStep("ballot")} subCount={subs.length} onViewSubs={goToLeaderboard} />;
-
-  if (step === "ballot")      return <BallotScreen name={name} picks={picks} setPicks={setPicks} onReview={() => setStep("confirm")} />;
-
-  if (step === "confirm")     return <ConfirmScreen name={name} picks={picks} setPicks={setPicks} onSubmit={submit} onBack={() => setStep("ballot")} saving={saving} />;
-
-  if (step === "success")     return <SuccessScreen name={name} onViewSubs={goToLeaderboard} onReset={reset} />;
-
-  if (step === "leaderboard") return <LeaderboardScreen subs={subs} onBack={reset} />;
-
-  return null;
-
+async function submit() {
+setSaving(true);
+await saveSub({ name: name.trim(), picks, submittedAt: new Date().toISOString(), id: Math.random().toString(36).slice(2) });
+const updated = await loadSubs();
+setSubs(updated);
+setSaving(false);
+setStep(“success”);
 }
 
+function reset() { setName(””); setPicks({}); setStep(“intro”); }
+async function goLeaderboard() { const s = await loadSubs(); setSubs(s); setStep(“leaderboard”); }
 
+if (step === “intro”)       return <IntroScreen name={name} setName={setName} onStart={() => setStep(“ballot”)} subCount={subs.length} onViewSubs={goLeaderboard} />;
+if (step === “ballot”)      return <BallotScreen name={name} picks={picks} setPicks={setPicks} onReview={() => setStep(“confirm”)} />;
+if (step === “confirm”)     return <ConfirmScreen name={name} picks={picks} setPicks={setPicks} onSubmit={submit} onBack={() => setStep(“ballot”)} saving={saving} />;
+if (step === “success”)     return <SuccessScreen name={name} onViewSubs={goLeaderboard} onReset={reset} />;
+if (step === “leaderboard”) return <LeaderboardScreen subs={subs} onBack={reset} />;
+return null;
+}
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
+ReactDOM.createRoot(document.getElementById(“root”)).render(<App />);
 </script>
 
-
-
 </body>
-
 </html>
-
