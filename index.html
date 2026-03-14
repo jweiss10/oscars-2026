@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>98th Academy Awards -- Oscar Predictions 2026</title>
+  <title>98th Academy Awards - Oscar Predictions 2026</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; }
@@ -26,544 +26,378 @@ const JSONBIN_API_KEY = “$2a$10$7pJA5aNFtTclW4.bszbkkuEh0KP.G8lO0lculr8l0X1C1m
 const JSONBIN_BIN_ID  = “69b4193caa77b81da9e03806”;
 
 const CATEGORIES = [
-{ id:“best_picture”, name:“Best Picture”, icon:”🏆”, nominees:[“Bugonia”,“F1”,“Frankenstein”,“Hamnet”,“Marty Supreme”,“One Battle After Another”,“The Secret Agent”,“Sentimental Value”,“Sinners”,“Train Dreams”] },
-{ id:“best_director”, name:“Best Director”, icon:”🎬”, nominees:[“Paul Thomas Anderson – One Battle After Another”,“Ryan Coogler – Sinners”,“Josh Safdie – Marty Supreme”,“Joachim Trier – Sentimental Value”,“Chloé Zhao – Hamnet”] },
-{ id:“best_actor”, name:“Best Actor”, icon:”🎭”, nominees:[“Timothée Chalamet – Marty Supreme”,“Leonardo DiCaprio – One Battle After Another”,“Ethan Hawke – Blue Moon”,“Michael B. Jordan – Sinners”,“Wagner Moura – The Secret Agent”] },
-{ id:“best_actress”, name:“Best Actress”, icon:”🌟”, nominees:[“Jessie Buckley – Hamnet”,“Rose Byrne – If I Had Legs I’d Kick You”,“Kate Hudson – Song Sung Blue”,“Renate Reinsve – Sentimental Value”,“Emma Stone – Bugonia”] },
-{ id:“best_supporting_actor”, name:“Best Supporting Actor”, icon:”🎭”, nominees:[“Benicio Del Toro – One Battle After Another”,“Jacob Elordi – Frankenstein”,“Delroy Lindo – Sinners”,“Sean Penn – One Battle After Another”,“Stellan Skarsgård – Sentimental Value”] },
-{ id:“best_supporting_actress”, name:“Best Supporting Actress”, icon:”✨”, nominees:[“Elle Fanning – Sentimental Value”,“Inga Ibsdotter Lilleaas – Sentimental Value”,“Amy Madigan – Weapons”,“Wunmi Mosaku – Sinners”,“Teyana Taylor – One Battle After Another”] },
-{ id:“best_original_screenplay”, name:“Best Original Screenplay”, icon:”📝”, nominees:[“Blue Moon – Robert Kaplow”,“It Was Just an Accident – Jafar Panahi et al.”,“Marty Supreme – Ronald Bronstein & Josh Safdie”,“Sentimental Value – Eskil Vogt & Joachim Trier”,“Sinners – Ryan Coogler”] },
-{ id:“best_adapted_screenplay”, name:“Best Adapted Screenplay”, icon:”📖”, nominees:[“Bugonia – Will Tracy”,“Frankenstein – Guillermo del Toro”,“Hamnet – Chloé Zhao & Maggie O’Farrell”,“One Battle After Another – Paul Thomas Anderson”,“Train Dreams – Clint Bentley & Greg Kwedar”] },
-{ id:“best_animated_feature”, name:“Best Animated Feature”, icon:”🎨”, nominees:[“Arco”,“Elio”,“Kpop Demon Hunters”,“Little Amélie or the Character of Rain”,“Zootopia 2”] },
-{ id:“best_international_feature”, name:“Best International Feature Film”, icon:”🌍”, nominees:[“The Secret Agent – Brazil”,“It Was Just an Accident – France”,“Sentimental Value – Norway”,“Sirāt – Spain”,“The Voice of Hind Rajab – Tunisia”] },
-{ id:“best_documentary_feature”, name:“Best Documentary Feature”, icon:”🎥”, nominees:[“The Alabama Solution”,“Come See Me in the Good Light”,“Cutting Through Rocks”,“Mr. Nobody Against Putin”,“The Perfect Neighbor”] },
-{ id:“best_casting”, name:“Best Casting ✦ NEW”, icon:”🎪”, nominees:[“Hamnet – Nina Gold”,“Marty Supreme – Jennifer Venditti”,“One Battle After Another – Cassandra Kulukundis”,“The Secret Agent – Gabriel Domingues”,“Sinners – Francine Maisler”] },
-{ id:“best_cinematography”, name:“Best Cinematography”, icon:”📷”, nominees:[“Frankenstein – Dan Laustsen”,“Marty Supreme – Darius Khondji”,“One Battle After Another – Michael Bauman”,“Sinners – Autumn Durald Arkapaw”,“Train Dreams – Adolpho Veloso”] },
-{ id:“best_film_editing”, name:“Best Film Editing”, icon:”✂️”, nominees:[“F1 – Stephen Mirrione”,“Marty Supreme – Ronald Bronstein & Josh Safdie”,“One Battle After Another – Andy Jurgensen”,“Sentimental Value – Olivier Bugge Coutté”,“Sinners – Michael P. Shawver”] },
-{ id:“best_production_design”, name:“Best Production Design”, icon:”🏛️”, nominees:[“Frankenstein – Tamara Deverell”,“Hamnet – Fiona Crombie”,“Marty Supreme – Jack Fisk”,“One Battle After Another – Florencia Martin”,“Sinners – Hannah Beachler”] },
-{ id:“best_costume_design”, name:“Best Costume Design”, icon:”👗”, nominees:[“Avatar: Fire and Ash – Deborah L. Scott”,“Frankenstein – Kate Hawley”,“Hamnet – Malgosia Turzanska”,“Marty Supreme – Miyako Bellizzi”,“Sinners – Ruth E. Carter”] },
-{ id:“best_makeup”, name:“Best Makeup and Hairstyling”, icon:”💄”, nominees:[“Frankenstein – Mike Hill, Jordan Samuel, Cliona Furey”,“Kokuho – Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu”,“Sinners – Ken Diaz, Mike Fontaine, Shunika Terry”,“The Smashing Machine – Kazu Hiro, Glen Griffin, Bjoern Rehbein”,“The Ugly Stepsister – Thomas Foldberg, Anne Cathrine Sauerberg”] },
-{ id:“best_score”, name:“Best Original Score”, icon:”🎼”, nominees:[“Bugonia – Jerskin Fendrix”,“Frankenstein – Alexandre Desplat”,“Hamnet – Max Richter”,“One Battle After Another – Jonny Greenwood”,“Sinners – Ludwig Göransson”] },
-{ id:“best_song”, name:“Best Original Song”, icon:”🎵”, nominees:[’“Dear Me” – Diane Warren: Relentless’,’“Golden” – Kpop Demon Hunters’,’“I Lied To You” – Sinners’,’“Sweet Dreams Of Joy” – Viva Verdi!’,’“Train Dreams” – Train Dreams’] },
-{ id:“best_sound”, name:“Best Sound”, icon:”🔊”, nominees:[“F1”,“Frankenstein”,“One Battle After Another”,“Sinners”,“Sirāt”] },
-{ id:“best_vfx”, name:“Best Visual Effects”, icon:”⚡”, nominees:[“Avatar: Fire and Ash”,“F1”,“Jurassic World Rebirth”,“The Lost Bus”,“Sinners”] },
-{ id:“best_animated_short”, name:“Best Animated Short Film”, icon:”🎞️”, nominees:[“Butterfly”,“Forevergreen”,“The Girl Who Cried Pearls”,“Retirement Plan”,“The Three Sisters”] },
-{ id:“best_live_action_short”, name:“Best Live Action Short Film”, icon:”🎬”, nominees:[“Butcher’s Stain”,“A Friend of Dorothy”,“Jane Austen’s Period Drama”,“The Singers”,“Two People Exchanging Saliva”] },
-{ id:“best_documentary_short”, name:“Best Documentary Short Film”, icon:”📹”, nominees:[“All the Empty Rooms”,“Armed Only with a Camera: The Life and Death of Brent Renaud”,‘Children No More: “Were and Are Gone”’,“The Devil Is Busy”,“Perfectly a Strangeness”] },
+{ id:“best_picture”, name:“Best Picture”, nominees:[“Bugonia”,“F1”,“Frankenstein”,“Hamnet”,“Marty Supreme”,“One Battle After Another”,“The Secret Agent”,“Sentimental Value”,“Sinners”,“Train Dreams”] },
+{ id:“best_director”, name:“Best Director”, nominees:[“Paul Thomas Anderson - One Battle After Another”,“Ryan Coogler - Sinners”,“Josh Safdie - Marty Supreme”,“Joachim Trier - Sentimental Value”,“Chloe Zhao - Hamnet”] },
+{ id:“best_actor”, name:“Best Actor”, nominees:[“Timothee Chalamet - Marty Supreme”,“Leonardo DiCaprio - One Battle After Another”,“Ethan Hawke - Blue Moon”,“Michael B. Jordan - Sinners”,“Wagner Moura - The Secret Agent”] },
+{ id:“best_actress”, name:“Best Actress”, nominees:[“Jessie Buckley - Hamnet”,“Rose Byrne - If I Had Legs I’d Kick You”,“Kate Hudson - Song Sung Blue”,“Renate Reinsve - Sentimental Value”,“Emma Stone - Bugonia”] },
+{ id:“best_supporting_actor”, name:“Best Supporting Actor”, nominees:[“Benicio Del Toro - One Battle After Another”,“Jacob Elordi - Frankenstein”,“Delroy Lindo - Sinners”,“Sean Penn - One Battle After Another”,“Stellan Skarsgard - Sentimental Value”] },
+{ id:“best_supporting_actress”, name:“Best Supporting Actress”, nominees:[“Elle Fanning - Sentimental Value”,“Inga Ibsdotter Lilleaas - Sentimental Value”,“Amy Madigan - Weapons”,“Wunmi Mosaku - Sinners”,“Teyana Taylor - One Battle After Another”] },
+{ id:“best_original_screenplay”, name:“Best Original Screenplay”, nominees:[“Blue Moon - Robert Kaplow”,“It Was Just an Accident - Jafar Panahi et al.”,“Marty Supreme - Ronald Bronstein & Josh Safdie”,“Sentimental Value - Eskil Vogt & Joachim Trier”,“Sinners - Ryan Coogler”] },
+{ id:“best_adapted_screenplay”, name:“Best Adapted Screenplay”, nominees:[“Bugonia - Will Tracy”,“Frankenstein - Guillermo del Toro”,“Hamnet - Chloe Zhao & Maggie O’Farrell”,“One Battle After Another - Paul Thomas Anderson”,“Train Dreams - Clint Bentley & Greg Kwedar”] },
+{ id:“best_animated_feature”, name:“Best Animated Feature”, nominees:[“Arco”,“Elio”,“Kpop Demon Hunters”,“Little Amelie or the Character of Rain”,“Zootopia 2”] },
+{ id:“best_international_feature”, name:“Best International Feature Film”, nominees:[“The Secret Agent - Brazil”,“It Was Just an Accident - France”,“Sentimental Value - Norway”,“Sirat - Spain”,“The Voice of Hind Rajab - Tunisia”] },
+{ id:“best_documentary_feature”, name:“Best Documentary Feature”, nominees:[“The Alabama Solution”,“Come See Me in the Good Light”,“Cutting Through Rocks”,“Mr. Nobody Against Putin”,“The Perfect Neighbor”] },
+{ id:“best_casting”, name:“Best Casting (NEW)”, nominees:[“Hamnet - Nina Gold”,“Marty Supreme - Jennifer Venditti”,“One Battle After Another - Cassandra Kulukundis”,“The Secret Agent - Gabriel Domingues”,“Sinners - Francine Maisler”] },
+{ id:“best_cinematography”, name:“Best Cinematography”, nominees:[“Frankenstein - Dan Laustsen”,“Marty Supreme - Darius Khondji”,“One Battle After Another - Michael Bauman”,“Sinners - Autumn Durald Arkapaw”,“Train Dreams - Adolpho Veloso”] },
+{ id:“best_film_editing”, name:“Best Film Editing”, nominees:[“F1 - Stephen Mirrione”,“Marty Supreme - Ronald Bronstein & Josh Safdie”,“One Battle After Another - Andy Jurgensen”,“Sentimental Value - Olivier Bugge Coutte”,“Sinners - Michael P. Shawver”] },
+{ id:“best_production_design”, name:“Best Production Design”, nominees:[“Frankenstein - Tamara Deverell”,“Hamnet - Fiona Crombie”,“Marty Supreme - Jack Fisk”,“One Battle After Another - Florencia Martin”,“Sinners - Hannah Beachler”] },
+{ id:“best_costume_design”, name:“Best Costume Design”, nominees:[“Avatar: Fire and Ash - Deborah L. Scott”,“Frankenstein - Kate Hawley”,“Hamnet - Malgosia Turzanska”,“Marty Supreme - Miyako Bellizzi”,“Sinners - Ruth E. Carter”] },
+{ id:“best_makeup”, name:“Best Makeup and Hairstyling”, nominees:[“Frankenstein - Mike Hill, Jordan Samuel, Cliona Furey”,“Kokuho - Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu”,“Sinners - Ken Diaz, Mike Fontaine, Shunika Terry”,“The Smashing Machine - Kazu Hiro, Glen Griffin, Bjoern Rehbein”,“The Ugly Stepsister - Thomas Foldberg, Anne Cathrine Sauerberg”] },
+{ id:“best_score”, name:“Best Original Score”, nominees:[“Bugonia - Jerskin Fendrix”,“Frankenstein - Alexandre Desplat”,“Hamnet - Max Richter”,“One Battle After Another - Jonny Greenwood”,“Sinners - Ludwig Goransson”] },
+{ id:“best_song”, name:“Best Original Song”, nominees:[“Dear Me - Diane Warren: Relentless”,“Golden - Kpop Demon Hunters”,“I Lied To You - Sinners”,“Sweet Dreams Of Joy - Viva Verdi!”,“Train Dreams - Train Dreams”] },
+{ id:“best_sound”, name:“Best Sound”, nominees:[“F1”,“Frankenstein”,“One Battle After Another”,“Sinners”,“Sirat”] },
+{ id:“best_vfx”, name:“Best Visual Effects”, nominees:[“Avatar: Fire and Ash”,“F1”,“Jurassic World Rebirth”,“The Lost Bus”,“Sinners”] },
+{ id:“best_animated_short”, name:“Best Animated Short Film”, nominees:[“Butterfly”,“Forevergreen”,“The Girl Who Cried Pearls”,“Retirement Plan”,“The Three Sisters”] },
+{ id:“best_live_action_short”, name:“Best Live Action Short Film”, nominees:[“Butcher’s Stain”,“A Friend of Dorothy”,“Jane Austen’s Period Drama”,“The Singers”,“Two People Exchanging Saliva”] },
+{ id:“best_documentary_short”, name:“Best Documentary Short Film”, nominees:[“All the Empty Rooms”,“Armed Only with a Camera: The Life and Death of Brent Renaud”,“Children No More: Were and Are Gone”,“The Devil Is Busy”,“Perfectly a Strangeness”] },
 ];
 
-// ── PALETTE ──────────────────────────────────────────────────────────────────
 const C = {
-bg:        “#F5F0E8”,
-bgDeep:    “#EDE8DC”,
-bgCard:    “#FAF7F2”,
-border:    “#DDD5C0”,
-borderGold:”#C9A227”,
-gold:      “#B8960C”,
-goldDark:  “#8B6914”,
-goldLight: “#F5D060”,
-text:      “#1A1208”,
-textMid:   “#5A4A2A”,
-textLight: “#8A7A5A”,
-willWin:   “#1A3A5C”,   // deep navy for Will Win
-shouldWin: “#4A1A0A”,   // deep burgundy for Should Win
-willWinBg: “#EAF0F8”,
-shouldWinBg:”#F8EDE8”,
-willWinBorder:”#7AAAD0”,
-shouldWinBorder:”#C07060”,
+bg:”#F5F0E8”, bgDeep:”#EDE8DC”, bgCard:”#FAF7F2”, border:”#DDD5C0”,
+borderGold:”#C9A227”, gold:”#B8960C”, goldDark:”#8B6914”, goldLight:”#F5D060”,
+text:”#1A1208”, textMid:”#5A4A2A”, textLight:”#8A7A5A”,
+willWin:”#1A3A5C”, shouldWin:”#4A1A0A”,
+willWinBg:”#EAF0F8”, shouldWinBg:”#F8EDE8”,
+willWinBorder:”#7AAAD0”, shouldWinBorder:”#C07060”,
 };
-
-const goldGrad = `linear-gradient(135deg, ${C.gold} 0%, ${C.goldLight} 45%, ${C.borderGold} 70%, ${C.goldDark} 100%)`;
-const ff = “Georgia, serif”;
+const goldGrad = “linear-gradient(135deg,#B8960C 0%,#F5D060 45%,#C9A227 70%,#8B6914 100%)”;
+const ff = “Georgia,serif”;
 const TOTAL = CATEGORIES.length;
 
-// ── JSONBIN ───────────────────────────────────────────────────────────────────
-const BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-const HDR  = { “Content-Type”:“application/json”, “X-Master-Key”: JSONBIN_API_KEY, “X-Bin-Versioning”:“false” };
+const BASE = “https://api.jsonbin.io/v3/b/” + JSONBIN_BIN_ID;
+const HDR = { “Content-Type”:“application/json”, “X-Master-Key”:JSONBIN_API_KEY, “X-Bin-Versioning”:“false” };
 
 async function loadSubs() {
 try {
-const r = await fetch(BASE, { headers: HDR });
+const r = await fetch(BASE, { headers:HDR });
 if (!r.ok) throw new Error();
 const j = await r.json();
-return (Array.isArray(j.record) ? j.record : []).filter(s => !s.init);
-} catch { return []; }
+return (Array.isArray(j.record) ? j.record : []).filter(function(s){ return !s.init; });
+} catch(e) { return []; }
 }
 async function saveSub(sub) {
 const existing = await loadSubs();
 existing.push(sub);
-// preserve init record
-await fetch(BASE, { method:“PUT”, headers: HDR, body: JSON.stringify([{init:true}, …existing]) });
+await fetch(BASE, { method:“PUT”, headers:HDR, body:JSON.stringify([{init:true}].concat(existing)) });
 }
 
-// ── HOOKS ─────────────────────────────────────────────────────────────────────
 function useWidth() {
-const [w, setW] = React.useState(window.innerWidth);
-React.useEffect(() => {
-const h = () => setW(window.innerWidth);
-window.addEventListener(“resize”, h);
-return () => window.removeEventListener(“resize”, h);
-}, []);
+const [w,setW] = React.useState(window.innerWidth);
+React.useEffect(function(){
+const h = function(){ setW(window.innerWidth); };
+window.addEventListener(“resize”,h);
+return function(){ window.removeEventListener(“resize”,h); };
+},[]);
 return w;
 }
 
-// picks shape: { [catId]: { willWin: string|null, shouldWin: string|null } }
-function emptyPick() { return { willWin: null, shouldWin: null }; }
-function getPick(picks, catId) { return picks[catId] || emptyPick(); }
-function setCatPick(picks, catId, type, nominee) {
-const cur = getPick(picks, catId);
-return { …picks, [catId]: { …cur, [type]: nominee } };
+function getPick(picks,catId){ return picks[catId] || {willWin:null,shouldWin:null}; }
+function setCatPick(picks,catId,type,nominee){
+const cur = getPick(picks,catId);
+return Object.assign({},picks,{[catId]:Object.assign({},cur,{[type]:nominee})});
 }
-function countPicked(picks) {
-return CATEGORIES.filter(c => {
-const p = getPick(picks, c.id);
-return p.willWin || p.shouldWin;
+function countComplete(picks){
+return CATEGORIES.filter(function(c){
+const p=getPick(picks,c.id); return p.willWin && p.shouldWin;
 }).length;
 }
-function countComplete(picks) {
-return CATEGORIES.filter(c => {
-const p = getPick(picks, c.id);
-return p.willWin && p.shouldWin;
+function countStarted(picks){
+return CATEGORIES.filter(function(c){
+const p=getPick(picks,c.id); return p.willWin || p.shouldWin;
 }).length;
 }
 
-// ── SHARED UI ─────────────────────────────────────────────────────────────────
-function Header({ name, picks, isMobile, onMenu }) {
-const started = countPicked(picks);
-const complete = countComplete(picks);
-const pct = Math.round((complete / TOTAL) * 100);
-return (
-<div style={{ background: C.bgDeep, borderBottom: `2px solid ${C.borderGold}`, padding: “0.7rem 1rem”, display: “flex”, alignItems: “center”, justifyContent: “space-between”, position: “sticky”, top: 0, zIndex: 50, boxShadow: “0 2px 8px rgba(0,0,0,0.08)” }}>
-<div>
-<div style={{ fontSize: “0.58rem”, letterSpacing: “0.35em”, color: C.gold, textTransform: “uppercase” }}>🏆 Oscar Ballot 2026</div>
-<div style={{ color: C.text, fontSize: “0.85rem”, fontWeight: “bold”, marginTop: 2 }}>{name}</div>
-</div>
-<div style={{ display: “flex”, alignItems: “center”, gap: “0.75rem” }}>
-<div style={{ textAlign: “right” }}>
-<div style={{ fontSize: “0.6rem”, color: C.textLight, marginBottom: 3 }}>
-{complete} complete · {started - complete > 0 ? `${started - complete} partial` : “”}
-</div>
-<div style={{ width: 80, height: 4, background: C.border, borderRadius: 2 }}>
-<div style={{ width: `${pct}%`, height: “100%”, background: goldGrad, borderRadius: 2, transition: “width 0.4s” }} />
-</div>
-</div>
-{isMobile && onMenu && (
-<button onClick={onMenu} style={{ background: C.bgCard, border: `1px solid ${C.borderGold}`, borderRadius: 5, padding: “0.4rem 0.65rem”, cursor: “pointer”, color: C.gold, fontSize: “1.1rem”, lineHeight: 1 }}>☰</button>
-)}
-</div>
-</div>
+function Header(props){
+const complete = countComplete(props.picks);
+const pct = Math.round((complete/TOTAL)*100);
+return React.createElement(“div”,{style:{background:C.bgDeep,borderBottom:“2px solid “+C.borderGold,padding:“0.7rem 1rem”,display:“flex”,alignItems:“center”,justifyContent:“space-between”,position:“sticky”,top:0,zIndex:50,boxShadow:“0 2px 8px rgba(0,0,0,0.08)”}},
+React.createElement(“div”,null,
+React.createElement(“div”,{style:{fontSize:“0.58rem”,letterSpacing:“0.35em”,color:C.gold,textTransform:“uppercase”}},“OSCAR BALLOT 2026”),
+React.createElement(“div”,{style:{color:C.text,fontSize:“0.85rem”,fontWeight:“bold”,marginTop:2}},props.name)
+),
+React.createElement(“div”,{style:{display:“flex”,alignItems:“center”,gap:“0.75rem”}},
+React.createElement(“div”,{style:{textAlign:“right”}},
+React.createElement(“div”,{style:{fontSize:“0.6rem”,color:C.textLight,marginBottom:3}},complete+”/”+TOTAL+” complete”),
+React.createElement(“div”,{style:{width:80,height:4,background:C.border,borderRadius:2}},
+React.createElement(“div”,{style:{width:pct+”%”,height:“100%”,background:goldGrad,borderRadius:2,transition:“width 0.4s”}})
+)
+),
+props.isMobile && props.onMenu && React.createElement(“button”,{onClick:props.onMenu,style:{background:C.bgCard,border:“1px solid “+C.borderGold,borderRadius:5,padding:“0.4rem 0.65rem”,cursor:“pointer”,color:C.gold,fontSize:“1.1rem”,lineHeight:1}},”=”)
+)
 );
 }
 
-function Legend() {
-return (
-<div style={{ display: “flex”, gap: “1rem”, marginBottom: “1rem”, flexWrap: “wrap” }}>
-<div style={{ display: “flex”, alignItems: “center”, gap: “0.4rem” }}>
-<div style={{ width: 12, height: 12, borderRadius: 2, background: C.willWinBg, border: `2px solid ${C.willWinBorder}` }} />
-<span style={{ fontSize: “0.72rem”, color: C.willWin, fontWeight: “bold” }}>Will Win</span>
-<span style={{ fontSize: “0.68rem”, color: C.textLight }}>– your prediction</span>
-</div>
-<div style={{ display: “flex”, alignItems: “center”, gap: “0.4rem” }}>
-<div style={{ width: 12, height: 12, borderRadius: 2, background: C.shouldWinBg, border: `2px solid ${C.shouldWinBorder}` }} />
-<span style={{ fontSize: “0.72rem”, color: C.shouldWin, fontWeight: “bold” }}>Should Win</span>
-<span style={{ fontSize: “0.68rem”, color: C.textLight }}>– your preference</span>
-</div>
-</div>
-);
-}
-
-function NomineeButton({ nominee, willSelected, shouldSelected, onWill, onShould }) {
-const isWill   = willSelected === nominee;
-const isShould = shouldSelected === nominee;
-const isBoth   = isWill && isShould;
-
-let bg = C.bgCard, border = C.border, textColor = C.text;
-if (isBoth) { bg = “#EEF4F0”; border = C.borderGold; }
-else if (isWill)   { bg = C.willWinBg;   border = C.willWinBorder; }
-else if (isShould) { bg = C.shouldWinBg; border = C.shouldWinBorder; }
-
-return (
-<div style={{ background: bg, border: `1.5px solid ${border}`, borderRadius: 8, padding: “0.75rem 1rem”, transition: “all 0.15s” }}>
-<div style={{ color: textColor, fontSize: “0.88rem”, lineHeight: 1.4, marginBottom: “0.6rem” }}>{nominee}</div>
-<div style={{ display: “flex”, gap: “0.5rem” }}>
-<button
-onClick={onWill}
-style={{
-flex: 1, padding: “0.35rem 0.5rem”, borderRadius: 5, border: `1.5px solid ${isWill ? C.willWin : C.border}`,
-background: isWill ? C.willWin : “transparent”, color: isWill ? “#fff” : C.willWin,
-fontSize: “0.7rem”, fontWeight: “bold”, cursor: “pointer”, fontFamily: ff,
-letterSpacing: “0.05em”, transition: “all 0.15s”,
-}}
->
-{isWill ? “✓ Will Win” : “Will Win”}
-</button>
-<button
-onClick={onShould}
-style={{
-flex: 1, padding: “0.35rem 0.5rem”, borderRadius: 5, border: `1.5px solid ${isShould ? C.shouldWin : C.border}`,
-background: isShould ? C.shouldWin : “transparent”, color: isShould ? “#fff” : C.shouldWin,
-fontSize: “0.7rem”, fontWeight: “bold”, cursor: “pointer”, fontFamily: ff,
-letterSpacing: “0.05em”, transition: “all 0.15s”,
-}}
->
-{isShould ? “✓ Should Win” : “Should Win”}
-</button>
-</div>
-</div>
-);
-}
-
-function CategoryList({ picks, activeCategory, onSelect }) {
-return CATEGORIES.map((c, i) => {
-const p = getPick(picks, c.id);
-const complete = p.willWin && p.shouldWin;
-const partial  = (p.willWin || p.shouldWin) && !complete;
-const isActive = i === activeCategory;
-return (
-<button key={c.id} onClick={() => onSelect(i)} style={{
-padding: “0.6rem 1rem”, background: isActive ? “#EDE0C0” : “transparent”,
-border: “none”, borderLeft: isActive ? `3px solid ${C.borderGold}` : “3px solid transparent”,
-textAlign: “left”, cursor: “pointer”,
-color: isActive ? C.text : complete ? C.textMid : partial ? C.textMid : C.textLight,
-fontSize: “0.72rem”, lineHeight: 1.3, fontFamily: ff,
-display: “flex”, alignItems: “center”, gap: “0.5rem”, width: “100%”,
-borderBottom: `1px solid ${C.border}`,
-}}>
-<span style={{ fontSize: “0.9rem”, flexShrink: 0 }}>{c.icon}</span>
-<span style={{ flex: 1 }}>{c.name.replace(” ✦ NEW”,””)}{c.name.includes(“NEW”) ? “ ✦” : “”}</span>
-{complete && <span style={{ color: C.gold, fontSize: “0.8rem”, flexShrink: 0 }}>✓</span>}
-{partial  && <span style={{ color: C.borderGold, fontSize: “0.7rem”, flexShrink: 0 }}>½</span>}
-</button>
+function CategoryList(props){
+return CATEGORIES.map(function(c,i){
+const p=getPick(props.picks,c.id);
+const complete=p.willWin&&p.shouldWin, partial=(p.willWin||p.shouldWin)&&!complete;
+const isActive=i===props.activeCategory;
+return React.createElement(“button”,{key:c.id,onClick:function(){props.onSelect(i);},style:{padding:“0.6rem 1rem”,background:isActive?”#EDE0C0”:“transparent”,border:“none”,borderLeft:isActive?“3px solid “+C.borderGold:“3px solid transparent”,textAlign:“left”,cursor:“pointer”,color:isActive?C.text:C.textLight,fontSize:“0.73rem”,lineHeight:1.3,fontFamily:ff,display:“flex”,alignItems:“center”,gap:“0.5rem”,width:“100%”,borderBottom:“1px solid “+C.border}},
+React.createElement(“span”,{style:{flex:1,textAlign:“left”}},c.name),
+complete && React.createElement(“span”,{style:{color:C.gold,fontSize:“0.8rem”,flexShrink:0}},“OK”),
+partial  && React.createElement(“span”,{style:{color:C.borderGold,fontSize:“0.7rem”,flexShrink:0}},”~”)
 );
 });
 }
 
-// ── INTRO ─────────────────────────────────────────────────────────────────────
-function IntroScreen({ name, setName, onStart, subCount, onViewSubs }) {
-return (
-<div style={{ minHeight: “100vh”, background: C.bg, display: “flex”, flexDirection: “column”, alignItems: “center”, justifyContent: “center”, padding: “1.5rem”, position: “relative”, overflow: “hidden” }}>
-<div style={{ position: “absolute”, inset: 0, backgroundImage: `radial-gradient(circle at 30% 50%, rgba(184,150,12,0.07) 0%, transparent 55%), radial-gradient(circle at 70% 20%, rgba(184,150,12,0.05) 0%, transparent 45%)`, pointerEvents: “none” }} />
-<div style={{ textAlign: “center”, width: “100%”, maxWidth: 480, position: “relative”, zIndex: 1 }}>
-<div style={{ fontSize: “3.5rem”, marginBottom: “0.4rem”, filter: “drop-shadow(0 2px 8px rgba(184,150,12,0.4))” }}>🏆</div>
-<div style={{ fontSize: “0.62rem”, letterSpacing: “0.45em”, color: C.gold, marginBottom: “0.4rem”, textTransform: “uppercase” }}>The 98th Academy Awards</div>
-<h1 style={{ fontSize: “clamp(2rem,9vw,3rem)”, fontWeight: 400, margin: “0 0 0.2rem”, lineHeight: 1.1, background: goldGrad, WebkitBackgroundClip: “text”, WebkitTextFillColor: “transparent” }}>
-Oscar Predictions
-</h1>
-<div style={{ fontSize: “0.72rem”, letterSpacing: “0.25em”, color: C.textLight, marginBottom: “0.75rem”, textTransform: “uppercase” }}>March 15, 2026 · Dolby Theatre</div>
-
-```
-    <div style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 8, padding: "1rem", marginBottom: "1.5rem", display: "flex", gap: "1.5rem", justifyContent: "center" }}>
-      <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: "0.65rem", color: C.textLight, marginBottom: 2 }}>Categories</div>
-        <div style={{ fontSize: "1.2rem", fontWeight: "bold", color: C.gold }}>24</div>
-      </div>
-      <div style={{ width: 1, background: C.border }} />
-      <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: "0.65rem", color: C.willWin, fontWeight: "bold", marginBottom: 2 }}>Will Win</div>
-        <div style={{ fontSize: "0.65rem", color: C.textLight }}>Your prediction</div>
-      </div>
-      <div style={{ width: 1, background: C.border }} />
-      <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: "0.65rem", color: C.shouldWin, fontWeight: "bold", marginBottom: 2 }}>Should Win</div>
-        <div style={{ fontSize: "0.65rem", color: C.textLight }}>Your preference</div>
-      </div>
-    </div>
-
-    <p style={{ color: C.textMid, fontSize: "0.9rem", lineHeight: 1.75, marginBottom: "1.5rem" }}>
-      For each category, pick who you think <strong style={{ color: C.willWin }}>will win</strong> and who you think <strong style={{ color: C.shouldWin }}>should win</strong>. They can be the same -- or tell a completely different story.
-    </p>
-    <input
-      type="text" placeholder="Your name" value={name}
-      onChange={e => setName(e.target.value)}
-      onKeyDown={e => e.key === "Enter" && name.trim() && onStart()}
-      style={{ width: "100%", padding: "0.9rem 1.2rem", background: C.bgCard, border: `1.5px solid ${C.border}`, borderRadius: 6, color: C.text, fontSize: "1rem", outline: "none", marginBottom: "0.7rem" }}
-    />
-    <button disabled={!name.trim()} onClick={onStart} style={{ width: "100%", padding: "1rem", background: name.trim() ? goldGrad : C.border, border: "none", borderRadius: 6, color: name.trim() ? "#1A1208" : C.textLight, fontSize: "0.9rem", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, cursor: name.trim() ? "pointer" : "not-allowed", marginBottom: "0.7rem" }}>
-      Enter the Ballot &#8594;
-    </button>
-    {subCount > 0 && (
-      <button onClick={onViewSubs} style={{ width: "100%", padding: "0.75rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>
-        View {subCount} submission{subCount !== 1 ? "s" : ""}
-      </button>
-    )}
-  </div>
-</div>
-```
-
+function NomineeButton(props){
+const isWill=props.willSelected===props.nominee;
+const isShould=props.shouldSelected===props.nominee;
+let bg=C.bgCard, border=C.border;
+if(isWill&&isShould){bg=”#EEF4F0”;border=C.borderGold;}
+else if(isWill){bg=C.willWinBg;border=C.willWinBorder;}
+else if(isShould){bg=C.shouldWinBg;border=C.shouldWinBorder;}
+return React.createElement(“div”,{style:{background:bg,border:“1.5px solid “+border,borderRadius:8,padding:“0.75rem 1rem”,transition:“all 0.15s”,marginBottom:“0.5rem”}},
+React.createElement(“div”,{style:{color:C.text,fontSize:“0.88rem”,lineHeight:1.4,marginBottom:“0.6rem”}},props.nominee),
+React.createElement(“div”,{style:{display:“flex”,gap:“0.5rem”}},
+React.createElement(“button”,{onClick:props.onWill,style:{flex:1,padding:“0.35rem 0.5rem”,borderRadius:5,border:“1.5px solid “+(isWill?C.willWin:C.border),background:isWill?C.willWin:“transparent”,color:isWill?”#fff”:C.willWin,fontSize:“0.7rem”,fontWeight:“bold”,cursor:“pointer”,fontFamily:ff}},isWill?“Will Win (selected)”:“Will Win”),
+React.createElement(“button”,{onClick:props.onShould,style:{flex:1,padding:“0.35rem 0.5rem”,borderRadius:5,border:“1.5px solid “+(isShould?C.shouldWin:C.border),background:isShould?C.shouldWin:“transparent”,color:isShould?”#fff”:C.shouldWin,fontSize:“0.7rem”,fontWeight:“bold”,cursor:“pointer”,fontFamily:ff}},isShould?“Should Win (selected)”:“Should Win”)
+)
 );
 }
 
-// ── BALLOT ────────────────────────────────────────────────────────────────────
-function BallotScreen({ name, picks, setPicks, onReview }) {
-const isMobile = useWidth() < 680;
-const [activeCat, setActiveCat] = React.useState(0);
-const [animating, setAnimating] = React.useState(false);
-const [drawerOpen, setDrawerOpen] = React.useState(false);
-const complete = countComplete(picks);
-const cat = CATEGORIES[activeCat];
-const catPick = getPick(picks, cat.id);
-
-function goTo(idx) {
-if (idx < 0 || idx >= TOTAL) return;
-setAnimating(true); setDrawerOpen(false);
-setTimeout(() => { setActiveCat(idx); setAnimating(false); }, 130);
-}
-function setType(type, nominee) {
-// toggle off if same
-const cur = getPick(picks, cat.id)[type];
-setPicks(p => setCatPick(p, cat.id, type, cur === nominee ? null : nominee));
-}
-
-return (
-<div style={{ minHeight: “100vh”, background: C.bg, display: “flex”, flexDirection: “column” }}>
-<Header name={name} picks={picks} isMobile={isMobile} onMenu={() => setDrawerOpen(o => !o)} />
-
-```
-  <div style={{ display: "flex", flex: 1, overflow: "hidden", position: "relative" }}>
-    {!isMobile && (
-      <div style={{ width: 220, borderRight: `1px solid ${C.border}`, overflowY: "auto", flexShrink: 0, background: C.bgDeep }}>
-        <CategoryList picks={picks} activeCategory={activeCat} onSelect={goTo} />
-      </div>
-    )}
-
-    {isMobile && drawerOpen && (
-      <>
-        <div onClick={() => setDrawerOpen(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.35)", zIndex: 40 }} />
-        <div style={{ position: "fixed", top: 0, right: 0, bottom: 0, width: "78%", maxWidth: 290, background: C.bgDeep, zIndex: 50, overflowY: "auto", borderLeft: `2px solid ${C.borderGold}`, display: "flex", flexDirection: "column" }}>
-          <div style={{ padding: "0.9rem 1rem", borderBottom: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
-            <span style={{ color: C.gold, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>All Categories</span>
-            <button onClick={() => setDrawerOpen(false)} style={{ background: "none", border: "none", color: C.textLight, fontSize: "1.2rem", cursor: "pointer", padding: 0 }}>&#10005;</button>
-          </div>
-          <div style={{ overflowY: "auto", flex: 1 }}>
-            <CategoryList picks={picks} activeCategory={activeCat} onSelect={goTo} />
-          </div>
-        </div>
-      </>
-    )}
-
-    <div style={{ flex: 1, overflowY: "auto", padding: isMobile ? "1.25rem 1rem 5rem" : "2rem 2.5rem" }}>
-      <div style={{ maxWidth: 580, margin: "0 auto", opacity: animating ? 0 : 1, transition: "opacity 0.13s" }}>
-        <div style={{ marginBottom: "1.25rem" }}>
-          <div style={{ fontSize: "1.6rem", marginBottom: "0.2rem" }}>{cat.icon}</div>
-          <div style={{ fontSize: "0.58rem", letterSpacing: "0.3em", color: C.gold, textTransform: "uppercase", marginBottom: "0.2rem" }}>Category {activeCat + 1} of {TOTAL}</div>
-          <h2 style={{ margin: "0 0 0.15rem", fontSize: isMobile ? "1.2rem" : "1.5rem", fontWeight: 400, color: C.text }}>{cat.name}</h2>
-          {cat.name.includes("NEW") && <span style={{ display: "inline-block", fontSize: "0.58rem", letterSpacing: "0.2em", color: "#fff", background: C.gold, padding: "2px 8px", borderRadius: 2, textTransform: "uppercase" }}>First Time Category!</span>}
-        </div>
-
-        <Legend />
-
-        {/* Current picks summary */}
-        {(catPick.willWin || catPick.shouldWin) && (
-          <div style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 6, padding: "0.6rem 0.9rem", marginBottom: "0.9rem", fontSize: "0.75rem" }}>
-            {catPick.willWin && <div><span style={{ color: C.willWin, fontWeight: "bold" }}>Will Win: </span><span style={{ color: C.text }}>{catPick.willWin.split(" -- ")[0]}</span></div>}
-            {catPick.shouldWin && <div style={{ marginTop: catPick.willWin ? 3 : 0 }}><span style={{ color: C.shouldWin, fontWeight: "bold" }}>Should Win: </span><span style={{ color: C.text }}>{catPick.shouldWin.split(" -- ")[0]}</span></div>}
-          </div>
-        )}
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-          {cat.nominees.map(nominee => (
-            <NomineeButton
-              key={nominee}
-              nominee={nominee}
-              willSelected={catPick.willWin}
-              shouldSelected={catPick.shouldWin}
-              onWill={() => setType("willWin", nominee)}
-              onShould={() => setType("shouldWin", nominee)}
-            />
-          ))}
-        </div>
-
-        <div style={{ display: "flex", gap: "0.65rem", marginTop: "1.75rem" }}>
-          <button onClick={() => goTo(activeCat - 1)} disabled={activeCat === 0} style={{ padding: "0.75rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: activeCat === 0 ? C.border : C.textMid, fontSize: "0.78rem", cursor: activeCat === 0 ? "not-allowed" : "pointer", fontFamily: ff }}>&#8592; Prev</button>
-          {activeCat < TOTAL - 1
-            ? <button onClick={() => goTo(activeCat + 1)} style={{ flex: 1, padding: "0.75rem", background: (catPick.willWin && catPick.shouldWin) ? goldGrad : C.bgDeep, border: `1px solid ${C.border}`, borderRadius: 6, color: (catPick.willWin && catPick.shouldWin) ? C.text : C.textMid, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: (catPick.willWin && catPick.shouldWin) ? 700 : 400 }}>Next &#8594;</button>
-            : <button onClick={onReview} style={{ flex: 1, padding: "0.75rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.8rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review Ballot &#8594;</button>
-          }
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {isMobile && countPicked(picks) > 0 && (
-    <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: C.bgDeep, borderTop: `2px solid ${C.borderGold}`, padding: "0.7rem 1rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 30 }}>
-      <div style={{ fontSize: "0.72rem", color: C.textLight }}>{complete === TOTAL ? "&#127881; All complete!" : `${complete}/${TOTAL} complete`}</div>
-      <button onClick={onReview} style={{ padding: "0.55rem 1.2rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.75rem", cursor: "pointer", fontFamily: ff, fontWeight: 700 }}>Review & Submit &#8594;</button>
-    </div>
-  )}
-</div>
-```
-
+function IntroScreen(props){
+return React.createElement(“div”,{style:{minHeight:“100vh”,background:C.bg,display:“flex”,flexDirection:“column”,alignItems:“center”,justifyContent:“center”,padding:“1.5rem”}},
+React.createElement(“div”,{style:{textAlign:“center”,width:“100%”,maxWidth:480}},
+React.createElement(“div”,{style:{fontSize:“3rem”,marginBottom:“0.4rem”}},”[Trophy]”),
+React.createElement(“div”,{style:{fontSize:“0.62rem”,letterSpacing:“0.45em”,color:C.gold,marginBottom:“0.4rem”,textTransform:“uppercase”}},“The 98th Academy Awards”),
+React.createElement(“h1”,{style:{fontSize:“clamp(2rem,9vw,3rem)”,fontWeight:400,margin:“0 0 0.2rem”,lineHeight:1.1,background:goldGrad,WebkitBackgroundClip:“text”,WebkitTextFillColor:“transparent”}},“Oscar Predictions”),
+React.createElement(“div”,{style:{fontSize:“0.72rem”,letterSpacing:“0.25em”,color:C.textLight,marginBottom:“1rem”,textTransform:“uppercase”}},“March 15, 2026 - Dolby Theatre”),
+React.createElement(“div”,{style:{background:C.bgCard,border:“1px solid “+C.border,borderRadius:8,padding:“1rem”,marginBottom:“1.25rem”,display:“flex”,gap:“1.5rem”,justifyContent:“center”}},
+React.createElement(“div”,{style:{textAlign:“center”}},
+React.createElement(“div”,{style:{fontSize:“0.65rem”,color:C.textLight,marginBottom:2}},“Categories”),
+React.createElement(“div”,{style:{fontSize:“1.2rem”,fontWeight:“bold”,color:C.gold}},“24”)
+),
+React.createElement(“div”,{style:{width:1,background:C.border}}),
+React.createElement(“div”,{style:{textAlign:“center”}},
+React.createElement(“div”,{style:{fontSize:“0.65rem”,color:C.willWin,fontWeight:“bold”,marginBottom:2}},“Will Win”),
+React.createElement(“div”,{style:{fontSize:“0.65rem”,color:C.textLight}},“Your prediction”)
+),
+React.createElement(“div”,{style:{width:1,background:C.border}}),
+React.createElement(“div”,{style:{textAlign:“center”}},
+React.createElement(“div”,{style:{fontSize:“0.65rem”,color:C.shouldWin,fontWeight:“bold”,marginBottom:2}},“Should Win”),
+React.createElement(“div”,{style:{fontSize:“0.65rem”,color:C.textLight}},“Your preference”)
+)
+),
+React.createElement(“p”,{style:{color:C.textMid,fontSize:“0.9rem”,lineHeight:1.75,marginBottom:“1.5rem”}},“For each category, pick who you think will win and who you think should win. They can be the same film – or tell a completely different story.”),
+React.createElement(“input”,{type:“text”,placeholder:“Your name”,value:props.name,onChange:function(e){props.setName(e.target.value);},onKeyDown:function(e){if(e.key===“Enter”&&props.name.trim())props.onStart();},style:{width:“100%”,padding:“0.9rem 1.2rem”,background:C.bgCard,border:“1.5px solid “+C.border,borderRadius:6,color:C.text,fontSize:“1rem”,outline:“none”,marginBottom:“0.7rem”}}),
+React.createElement(“button”,{disabled:!props.name.trim(),onClick:props.onStart,style:{width:“100%”,padding:“1rem”,background:props.name.trim()?goldGrad:C.border,border:“none”,borderRadius:6,color:props.name.trim()?C.text:C.textLight,fontSize:“0.9rem”,letterSpacing:“0.12em”,textTransform:“uppercase”,fontWeight:700,cursor:props.name.trim()?“pointer”:“not-allowed”,marginBottom:“0.7rem”}},“Enter the Ballot”),
+props.subCount>0 && React.createElement(“button”,{onClick:props.onViewSubs,style:{width:“100%”,padding:“0.75rem”,background:“transparent”,border:“1px solid “+C.border,borderRadius:6,color:C.textMid,fontSize:“0.78rem”,letterSpacing:“0.1em”,textTransform:“uppercase”,cursor:“pointer”}},“View “+props.subCount+” submission”+(props.subCount!==1?“s”:””))
+)
 );
 }
 
-// ── CONFIRM ───────────────────────────────────────────────────────────────────
-function ConfirmScreen({ name, picks, setPicks, onSubmit, onBack, saving }) {
-const isMobile = useWidth() < 680;
-const [editing, setEditing] = React.useState(false);
-const complete = countComplete(picks);
+function BallotScreen(props){
+const isMobile=useWidth()<680;
+const [activeCat,setActiveCat]=React.useState(0);
+const [animating,setAnimating]=React.useState(false);
+const [drawerOpen,setDrawerOpen]=React.useState(false);
+const complete=countComplete(props.picks);
+const cat=CATEGORIES[activeCat];
+const catPick=getPick(props.picks,cat.id);
 
-if (editing) return <BallotScreen name={name} picks={picks} setPicks={setPicks} onReview={() => setEditing(false)} />;
+function goTo(idx){
+if(idx<0||idx>=TOTAL)return;
+setAnimating(true);setDrawerOpen(false);
+setTimeout(function(){setActiveCat(idx);setAnimating(false);},130);
+}
+function setType(type,nominee){
+const cur=getPick(props.picks,cat.id)[type];
+props.setPicks(function(p){return setCatPick(p,cat.id,type,cur===nominee?null:nominee);});
+}
 
-return (
-<div style={{ minHeight: “100vh”, background: C.bg }}>
-<Header name={name} picks={picks} isMobile={false} />
-<div style={{ maxWidth: 700, margin: “0 auto”, padding: isMobile ? “1.25rem 1rem 6rem” : “2rem” }}>
-<div style={{ marginBottom: “1.4rem” }}>
-<div style={{ fontSize: “0.58rem”, letterSpacing: “0.3em”, color: C.gold, textTransform: “uppercase”, marginBottom: “0.35rem” }}>Review Ballot</div>
-<h2 style={{ margin: 0, fontSize: isMobile ? “1.4rem” : “1.9rem”, fontWeight: 400, color: C.text }}>{name}’s Picks</h2>
-<div style={{ color: C.textLight, fontSize: “0.75rem”, marginTop: “0.35rem” }}>{complete}/{TOTAL} fully complete</div>
-</div>
+const sidebarEl = React.createElement(“div”,{style:{width:220,borderRight:“1px solid “+C.border,overflowY:“auto”,flexShrink:0,background:C.bgDeep}},
+React.createElement(CategoryList,{picks:props.picks,activeCategory:activeCat,onSelect:goTo})
+);
 
-```
-    {/* Column headers */}
-    <div style={{ display: "flex", gap: "0.5rem", padding: "0.4rem 0.85rem", marginBottom: "0.3rem" }}>
-      <div style={{ minWidth: isMobile ? 85 : 165, flexShrink: 0 }} />
-      <div style={{ flex: 1, fontSize: "0.65rem", fontWeight: "bold", color: C.willWin, textTransform: "uppercase", letterSpacing: "0.1em" }}>Will Win</div>
-      <div style={{ flex: 1, fontSize: "0.65rem", fontWeight: "bold", color: C.shouldWin, textTransform: "uppercase", letterSpacing: "0.1em" }}>Should Win</div>
-      <div style={{ width: 28 }} />
-    </div>
+const drawerEl = drawerOpen && React.createElement(React.Fragment,null,
+React.createElement(“div”,{onClick:function(){setDrawerOpen(false);},style:{position:“fixed”,inset:0,background:“rgba(0,0,0,0.35)”,zIndex:40}}),
+React.createElement(“div”,{style:{position:“fixed”,top:0,right:0,bottom:0,width:“78%”,maxWidth:290,background:C.bgDeep,zIndex:50,overflowY:“auto”,borderLeft:“2px solid “+C.borderGold,display:“flex”,flexDirection:“column”}},
+React.createElement(“div”,{style:{padding:“0.9rem 1rem”,borderBottom:“1px solid “+C.border,display:“flex”,justifyContent:“space-between”,alignItems:“center”,flexShrink:0}},
+React.createElement(“span”,{style:{color:C.gold,fontSize:“0.7rem”,letterSpacing:“0.2em”,textTransform:“uppercase”}},“All Categories”),
+React.createElement(“button”,{onClick:function(){setDrawerOpen(false);},style:{background:“none”,border:“none”,color:C.textLight,fontSize:“1.2rem”,cursor:“pointer”,padding:0}},“X”)
+),
+React.createElement(“div”,{style:{overflowY:“auto”,flex:1}},
+React.createElement(CategoryList,{picks:props.picks,activeCategory:activeCat,onSelect:goTo})
+)
+)
+);
 
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", marginBottom: "1.5rem" }}>
-      {CATEGORIES.map((c, i) => {
-        const p = getPick(picks, c.id);
-        const anyPick = p.willWin || p.shouldWin;
-        return (
-          <div key={c.id} style={{ display: "flex", gap: "0.5rem", padding: "0.55rem 0.85rem", background: anyPick ? C.bgCard : "#FFF8F5", border: `1px solid ${anyPick ? C.border : "#DDBBAA"}`, borderRadius: 5, alignItems: "flex-start" }}>
-            <div style={{ color: C.textLight, fontSize: "0.67rem", lineHeight: 1.4, minWidth: isMobile ? 85 : 165, flexShrink: 0, paddingTop: 1 }}>{c.name.replace(" &#10022; NEW","")}</div>
-            <div style={{ flex: 1, color: p.willWin ? C.willWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.willWin ? p.willWin.split(" -- ")[0] : <em style={{ color: C.border }}>--</em>}</div>
-            <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : "#CCC", fontSize: "0.75rem", lineHeight: 1.4 }}>{p.shouldWin ? p.shouldWin.split(" -- ")[0] : <em style={{ color: C.border }}>--</em>}</div>
-            <button onClick={() => setEditing(true)} style={{ background: "transparent", border: "none", color: C.textLight, cursor: "pointer", fontSize: "0.65rem", padding: 0, fontFamily: ff, flexShrink: 0, width: 28, textAlign: "right" }}>edit</button>
-          </div>
-        );
-      })}
-    </div>
-  </div>
+const summaryEl = (catPick.willWin||catPick.shouldWin) && React.createElement(“div”,{style:{background:C.bgCard,border:“1px solid “+C.border,borderRadius:6,padding:“0.6rem 0.9rem”,marginBottom:“0.9rem”,fontSize:“0.75rem”}},
+catPick.willWin && React.createElement(“div”,null,React.createElement(“span”,{style:{color:C.willWin,fontWeight:“bold”}},“Will Win: “),catPick.willWin.split(” - “)[0]),
+catPick.shouldWin && React.createElement(“div”,{style:{marginTop:catPick.willWin?3:0}},React.createElement(“span”,{style:{color:C.shouldWin,fontWeight:“bold”}},“Should Win: “),catPick.shouldWin.split(” - “)[0])
+);
 
-  <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: C.bgDeep, borderTop: `2px solid ${C.borderGold}`, padding: "0.75rem 1rem", display: "flex", gap: "0.65rem", zIndex: 30, boxShadow: "0 -2px 10px rgba(0,0,0,0.08)" }}>
-    <button onClick={onBack} style={{ padding: "0.85rem 1.1rem", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: "0.78rem", cursor: "pointer", fontFamily: ff, whiteSpace: "nowrap" }}>&#8592; Back</button>
-    <button onClick={onSubmit} disabled={saving} style={{ flex: 1, padding: "0.85rem", background: goldGrad, border: "none", borderRadius: 6, color: C.text, fontSize: "0.85rem", cursor: "pointer", fontFamily: ff, fontWeight: 700, opacity: saving ? 0.7 : 1 }}>
-      {saving ? "Submitting&#8230;" : "&#127942; Submit My Ballot"}
-    </button>
-  </div>
-</div>
-```
-
+return React.createElement(“div”,{style:{minHeight:“100vh”,background:C.bg,display:“flex”,flexDirection:“column”}},
+React.createElement(Header,{name:props.name,picks:props.picks,isMobile:isMobile,onMenu:function(){setDrawerOpen(function(o){return !o;});}}),
+React.createElement(“div”,{style:{display:“flex”,flex:1,overflow:“hidden”,position:“relative”}},
+!isMobile && sidebarEl,
+isMobile && drawerEl,
+React.createElement(“div”,{style:{flex:1,overflowY:“auto”,padding:isMobile?“1.25rem 1rem 5rem”:“2rem 2.5rem”}},
+React.createElement(“div”,{style:{maxWidth:580,margin:“0 auto”,opacity:animating?0:1,transition:“opacity 0.13s”}},
+React.createElement(“div”,{style:{marginBottom:“1.25rem”}},
+React.createElement(“div”,{style:{fontSize:“0.58rem”,letterSpacing:“0.3em”,color:C.gold,textTransform:“uppercase”,marginBottom:“0.2rem”}},“Category “+(activeCat+1)+” of “+TOTAL),
+React.createElement(“h2”,{style:{margin:“0 0 0.15rem”,fontSize:isMobile?“1.2rem”:“1.5rem”,fontWeight:400,color:C.text}},cat.name),
+cat.name.includes(“NEW”) && React.createElement(“span”,{style:{display:“inline-block”,fontSize:“0.58rem”,letterSpacing:“0.2em”,color:”#fff”,background:C.gold,padding:“2px 8px”,borderRadius:2,textTransform:“uppercase”}},“First Time Category!”)
+),
+React.createElement(“div”,{style:{display:“flex”,gap:“1.5rem”,marginBottom:“1rem”,flexWrap:“wrap”}},
+React.createElement(“div”,{style:{display:“flex”,alignItems:“center”,gap:“0.4rem”}},
+React.createElement(“div”,{style:{width:12,height:12,borderRadius:2,background:C.willWinBg,border:“2px solid “+C.willWinBorder}}),
+React.createElement(“span”,{style:{fontSize:“0.72rem”,color:C.willWin,fontWeight:“bold”}},“Will Win”),
+React.createElement(“span”,{style:{fontSize:“0.68rem”,color:C.textLight}},”- your prediction”)
+),
+React.createElement(“div”,{style:{display:“flex”,alignItems:“center”,gap:“0.4rem”}},
+React.createElement(“div”,{style:{width:12,height:12,borderRadius:2,background:C.shouldWinBg,border:“2px solid “+C.shouldWinBorder}}),
+React.createElement(“span”,{style:{fontSize:“0.72rem”,color:C.shouldWin,fontWeight:“bold”}},“Should Win”),
+React.createElement(“span”,{style:{fontSize:“0.68rem”,color:C.textLight}},”- your preference”)
+)
+),
+summaryEl,
+cat.nominees.map(function(nominee){
+return React.createElement(NomineeButton,{key:nominee,nominee:nominee,willSelected:catPick.willWin,shouldSelected:catPick.shouldWin,onWill:function(){setType(“willWin”,nominee);},onShould:function(){setType(“shouldWin”,nominee);}});
+}),
+React.createElement(“div”,{style:{display:“flex”,gap:“0.65rem”,marginTop:“1.75rem”}},
+React.createElement(“button”,{onClick:function(){goTo(activeCat-1);},disabled:activeCat===0,style:{padding:“0.75rem 1.1rem”,background:“transparent”,border:“1px solid “+C.border,borderRadius:6,color:activeCat===0?C.border:C.textMid,fontSize:“0.78rem”,cursor:activeCat===0?“not-allowed”:“pointer”,fontFamily:ff}},”< Prev”),
+activeCat<TOTAL-1
+? React.createElement(“button”,{onClick:function(){goTo(activeCat+1);},style:{flex:1,padding:“0.75rem”,background:(catPick.willWin&&catPick.shouldWin)?goldGrad:C.bgDeep,border:“1px solid “+C.border,borderRadius:6,color:(catPick.willWin&&catPick.shouldWin)?C.text:C.textMid,fontSize:“0.8rem”,cursor:“pointer”,fontFamily:ff,fontWeight:(catPick.willWin&&catPick.shouldWin)?700:400}},“Next >”)
+: React.createElement(“button”,{onClick:props.onReview,style:{flex:1,padding:“0.75rem”,background:goldGrad,border:“none”,borderRadius:6,color:C.text,fontSize:“0.8rem”,cursor:“pointer”,fontFamily:ff,fontWeight:700}},“Review Ballot”)
+)
+)
+)
+),
+isMobile && countStarted(props.picks)>0 && React.createElement(“div”,{style:{position:“fixed”,bottom:0,left:0,right:0,background:C.bgDeep,borderTop:“2px solid “+C.borderGold,padding:“0.7rem 1rem”,display:“flex”,alignItems:“center”,justifyContent:“space-between”,zIndex:30}},
+React.createElement(“div”,{style:{fontSize:“0.72rem”,color:C.textLight}},complete===TOTAL?“All complete!”:complete+”/”+TOTAL+” complete”),
+React.createElement(“button”,{onClick:props.onReview,style:{padding:“0.55rem 1.2rem”,background:goldGrad,border:“none”,borderRadius:6,color:C.text,fontSize:“0.75rem”,cursor:“pointer”,fontFamily:ff,fontWeight:700}},“Review & Submit”)
+)
 );
 }
 
-// ── SUCCESS ───────────────────────────────────────────────────────────────────
-function SuccessScreen({ name, onViewSubs, onReset }) {
-return (
-<div style={{ minHeight: “100vh”, background: C.bg, display: “flex”, flexDirection: “column”, alignItems: “center”, justifyContent: “center”, padding: “1.5rem”, textAlign: “center” }}>
-<div style={{ fontSize: “4.5rem”, marginBottom: “0.75rem”, filter: “drop-shadow(0 2px 12px rgba(184,150,12,0.4))” }}>🏆</div>
-<div style={{ fontSize: “0.6rem”, letterSpacing: “0.4em”, color: C.gold, marginBottom: “0.55rem”, textTransform: “uppercase” }}>Ballot Submitted</div>
-<h2 style={{ fontSize: “clamp(1.5rem,6vw,2.2rem)”, fontWeight: 400, color: C.text, margin: “0 0 1rem” }}>Good luck, {name}!</h2>
-<p style={{ color: C.textMid, maxWidth: 340, lineHeight: 1.75, marginBottom: “2rem”, fontSize: “0.88rem” }}>
-Your ballot is saved. Tune in <strong>Sunday March 15</strong> on ABC at 7:00 PM ET to see how your picks hold up.
-</p>
-<div style={{ display: “flex”, flexDirection: “column”, gap: “0.7rem”, width: “100%”, maxWidth: 340 }}>
-<button onClick={onViewSubs} style={{ padding: “1rem”, background: goldGrad, border: “none”, borderRadius: 6, color: C.text, fontSize: “0.85rem”, cursor: “pointer”, fontFamily: ff, fontWeight: 700 }}>See All Submissions</button>
-<button onClick={onReset} style={{ padding: “0.9rem”, background: “transparent”, border: `1px solid ${C.border}`, borderRadius: 6, color: C.textMid, fontSize: “0.85rem”, cursor: “pointer”, fontFamily: ff }}>Submit Another Ballot</button>
-</div>
-</div>
+function ConfirmScreen(props){
+const isMobile=useWidth()<680;
+const [editing,setEditing]=React.useState(false);
+const complete=countComplete(props.picks);
+if(editing)return React.createElement(BallotScreen,{name:props.name,picks:props.picks,setPicks:props.setPicks,onReview:function(){setEditing(false);}});
+return React.createElement(“div”,{style:{minHeight:“100vh”,background:C.bg}},
+React.createElement(Header,{name:props.name,picks:props.picks,isMobile:false}),
+React.createElement(“div”,{style:{maxWidth:700,margin:“0 auto”,padding:isMobile?“1.25rem 1rem 6rem”:“2rem”}},
+React.createElement(“div”,{style:{marginBottom:“1.4rem”}},
+React.createElement(“div”,{style:{fontSize:“0.58rem”,letterSpacing:“0.3em”,color:C.gold,textTransform:“uppercase”,marginBottom:“0.35rem”}},“Review Ballot”),
+React.createElement(“h2”,{style:{margin:0,fontSize:isMobile?“1.4rem”:“1.9rem”,fontWeight:400,color:C.text}},props.name+”’s Picks”),
+React.createElement(“div”,{style:{color:C.textLight,fontSize:“0.75rem”,marginTop:“0.35rem”}},complete+”/”+TOTAL+” fully complete”)
+),
+React.createElement(“div”,{style:{display:“flex”,gap:“0.5rem”,padding:“0.4rem 0.85rem”,marginBottom:“0.3rem”}},
+React.createElement(“div”,{style:{minWidth:isMobile?85:165,flexShrink:0}}),
+React.createElement(“div”,{style:{flex:1,fontSize:“0.65rem”,fontWeight:“bold”,color:C.willWin,textTransform:“uppercase”,letterSpacing:“0.1em”}},“Will Win”),
+React.createElement(“div”,{style:{flex:1,fontSize:“0.65rem”,fontWeight:“bold”,color:C.shouldWin,textTransform:“uppercase”,letterSpacing:“0.1em”}},“Should Win”),
+React.createElement(“div”,{style:{width:28}})
+),
+React.createElement(“div”,{style:{display:“flex”,flexDirection:“column”,gap:“0.35rem”,marginBottom:“1.5rem”}},
+CATEGORIES.map(function(c,i){
+const p=getPick(props.picks,c.id);
+return React.createElement(“div”,{key:c.id,style:{display:“flex”,gap:“0.5rem”,padding:“0.55rem 0.85rem”,background:p.willWin||p.shouldWin?C.bgCard:”#FFF8F5”,border:“1px solid “+(p.willWin||p.shouldWin?C.border:”#DDBBAA”),borderRadius:5,alignItems:“flex-start”}},
+React.createElement(“div”,{style:{color:C.textLight,fontSize:“0.67rem”,lineHeight:1.4,minWidth:isMobile?85:165,flexShrink:0,paddingTop:1}},c.name),
+React.createElement(“div”,{style:{flex:1,color:p.willWin?C.willWin:”#CCC”,fontSize:“0.75rem”,lineHeight:1.4}},p.willWin?p.willWin.split(” - “)[0]:”-”),
+React.createElement(“div”,{style:{flex:1,color:p.shouldWin?C.shouldWin:”#CCC”,fontSize:“0.75rem”,lineHeight:1.4}},p.shouldWin?p.shouldWin.split(” - “)[0]:”-”),
+React.createElement(“button”,{onClick:function(){setEditing(true);},style:{background:“transparent”,border:“none”,color:C.textLight,cursor:“pointer”,fontSize:“0.65rem”,padding:0,fontFamily:ff,flexShrink:0,width:28,textAlign:“right”}},“edit”)
+);
+})
+)
+),
+React.createElement(“div”,{style:{position:“fixed”,bottom:0,left:0,right:0,background:C.bgDeep,borderTop:“2px solid “+C.borderGold,padding:“0.75rem 1rem”,display:“flex”,gap:“0.65rem”,zIndex:30,boxShadow:“0 -2px 10px rgba(0,0,0,0.08)”}},
+React.createElement(“button”,{onClick:props.onBack,style:{padding:“0.85rem 1.1rem”,background:“transparent”,border:“1px solid “+C.border,borderRadius:6,color:C.textMid,fontSize:“0.78rem”,cursor:“pointer”,fontFamily:ff,whiteSpace:“nowrap”}},”< Back”),
+React.createElement(“button”,{onClick:props.onSubmit,disabled:props.saving,style:{flex:1,padding:“0.85rem”,background:goldGrad,border:“none”,borderRadius:6,color:C.text,fontSize:“0.85rem”,cursor:“pointer”,fontFamily:ff,fontWeight:700,opacity:props.saving?0.7:1}},props.saving?“Submitting…”:“Submit My Ballot”)
+)
 );
 }
 
-// ── LEADERBOARD ───────────────────────────────────────────────────────────────
-function LeaderboardScreen({ subs, onBack }) {
-const isMobile = useWidth() < 680;
-const [expanded, setExpanded] = React.useState(null);
-
-return (
-<div style={{ minHeight: “100vh”, background: C.bg, padding: isMobile ? “1.25rem 1rem” : “2rem”, maxWidth: 720, margin: “0 auto” }}>
-<div style={{ display: “flex”, alignItems: “center”, justifyContent: “space-between”, marginBottom: “1.75rem” }}>
-<div>
-<div style={{ fontSize: “0.6rem”, letterSpacing: “0.3em”, color: C.gold, textTransform: “uppercase”, marginBottom: “0.35rem” }}>98th Academy Awards</div>
-<h2 style={{ margin: 0, fontSize: isMobile ? “1.4rem” : “1.8rem”, fontWeight: 400, color: C.text }}>Submissions</h2>
-</div>
-<button onClick={onBack} style={{ padding: “0.6rem 1rem”, background: “transparent”, border: `1.5px solid ${C.borderGold}`, borderRadius: 6, color: C.gold, fontSize: “0.75rem”, cursor: “pointer”, fontFamily: ff, whiteSpace: “nowrap” }}>+ Add Mine</button>
-</div>
-
-```
-  {subs.length === 0 ? (
-    <div style={{ textAlign: "center", color: C.textLight, padding: "4rem 0" }}>
-      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>&#127916;</div>No submissions yet. Be the first!
-    </div>
-  ) : (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
-      {subs.map((s, i) => {
-        const open = expanded === i;
-        const cnt = Object.keys(s.picks || {}).length;
-        return (
-          <div key={s.id || i} style={{ background: C.bgCard, border: `1.5px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
-            <button onClick={() => setExpanded(open ? null : i)} style={{ width: "100%", padding: "0.85rem 1rem", background: C.bgDeep, border: "none", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", fontFamily: ff, textAlign: "left" }}>
-              <div>
-                <div style={{ color: C.text, fontSize: "0.95rem", fontWeight: "bold" }}>{s.name}</div>
-                <div style={{ color: C.textLight, fontSize: "0.65rem", marginTop: 2 }}>{cnt}/{TOTAL} categories &#183; {new Date(s.submittedAt).toLocaleDateString()}</div>
-              </div>
-              <span style={{ color: C.gold, fontSize: "0.75rem" }}>{open ? "&#9650;" : "&#9660;"}</span>
-            </button>
-            {open && (
-              <div style={{ padding: "0.85rem 1rem" }}>
-                <div style={{ display: "flex", gap: "0.5rem", padding: "0.3rem 0", marginBottom: "0.3rem", borderBottom: `1px solid ${C.border}` }}>
-                  <div style={{ minWidth: isMobile ? 80 : 150, flexShrink: 0 }} />
-                  <div style={{ flex: 1, fontSize: "0.62rem", fontWeight: "bold", color: C.willWin, textTransform: "uppercase" }}>Will Win</div>
-                  <div style={{ flex: 1, fontSize: "0.62rem", fontWeight: "bold", color: C.shouldWin, textTransform: "uppercase" }}>Should Win</div>
-                </div>
-                {CATEGORIES.map(c => {
-                  const p = getPick(s.picks || {}, c.id);
-                  return (
-                    <div key={c.id} style={{ display: "flex", gap: "0.5rem", padding: "0.25rem 0", borderBottom: `1px solid ${C.bgDeep}` }}>
-                      <div style={{ color: C.textLight, fontSize: "0.68rem", minWidth: isMobile ? 80 : 150, flexShrink: 0 }}>{c.name.replace(" &#10022; NEW","")}</div>
-                      <div style={{ flex: 1, color: p.willWin ? C.willWin : C.border, fontSize: "0.72rem" }}>{p.willWin ? p.willWin.split(" -- ")[0] : "--"}</div>
-                      <div style={{ flex: 1, color: p.shouldWin ? C.shouldWin : C.border, fontSize: "0.72rem" }}>{p.shouldWin ? p.shouldWin.split(" -- ")[0] : "--"}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  )}
-</div>
-```
-
+function SuccessScreen(props){
+return React.createElement(“div”,{style:{minHeight:“100vh”,background:C.bg,display:“flex”,flexDirection:“column”,alignItems:“center”,justifyContent:“center”,padding:“1.5rem”,textAlign:“center”}},
+React.createElement(“div”,{style:{fontSize:“4rem”,marginBottom:“0.75rem”}},”[Trophy]”),
+React.createElement(“div”,{style:{fontSize:“0.6rem”,letterSpacing:“0.4em”,color:C.gold,marginBottom:“0.55rem”,textTransform:“uppercase”}},“Ballot Submitted”),
+React.createElement(“h2”,{style:{fontSize:“clamp(1.5rem,6vw,2.2rem)”,fontWeight:400,color:C.text,margin:“0 0 1rem”}},“Good luck, “+props.name+”!”),
+React.createElement(“p”,{style:{color:C.textMid,maxWidth:340,lineHeight:1.75,marginBottom:“2rem”,fontSize:“0.88rem”}},“Your ballot is saved. Tune in Sunday March 15 on ABC at 7:00 PM ET.”),
+React.createElement(“div”,{style:{display:“flex”,flexDirection:“column”,gap:“0.7rem”,width:“100%”,maxWidth:340}},
+React.createElement(“button”,{onClick:props.onViewSubs,style:{padding:“1rem”,background:goldGrad,border:“none”,borderRadius:6,color:C.text,fontSize:“0.85rem”,cursor:“pointer”,fontFamily:ff,fontWeight:700}},“See All Submissions”),
+React.createElement(“button”,{onClick:props.onReset,style:{padding:“0.9rem”,background:“transparent”,border:“1px solid “+C.border,borderRadius:6,color:C.textMid,fontSize:“0.85rem”,cursor:“pointer”,fontFamily:ff}},“Submit Another Ballot”)
+)
 );
 }
 
-// ── ROOT ──────────────────────────────────────────────────────────────────────
-function App() {
-const [step, setStep]   = React.useState(“intro”);
-const [name, setName]   = React.useState(””);
-const [picks, setPicks] = React.useState({});
-const [subs, setSubs]   = React.useState([]);
-const [saving, setSaving] = React.useState(false);
+function LeaderboardScreen(props){
+const isMobile=useWidth()<680;
+const [expanded,setExpanded]=React.useState(null);
+return React.createElement(“div”,{style:{minHeight:“100vh”,background:C.bg,padding:isMobile?“1.25rem 1rem”:“2rem”,maxWidth:720,margin:“0 auto”}},
+React.createElement(“div”,{style:{display:“flex”,alignItems:“center”,justifyContent:“space-between”,marginBottom:“1.75rem”}},
+React.createElement(“div”,null,
+React.createElement(“div”,{style:{fontSize:“0.6rem”,letterSpacing:“0.3em”,color:C.gold,textTransform:“uppercase”,marginBottom:“0.35rem”}},“98th Academy Awards”),
+React.createElement(“h2”,{style:{margin:0,fontSize:isMobile?“1.4rem”:“1.8rem”,fontWeight:400,color:C.text}},“Submissions”)
+),
+React.createElement(“button”,{onClick:props.onBack,style:{padding:“0.6rem 1rem”,background:“transparent”,border:“1.5px solid “+C.borderGold,borderRadius:6,color:C.gold,fontSize:“0.75rem”,cursor:“pointer”,fontFamily:ff,whiteSpace:“nowrap”}},”+ Add Mine”)
+),
+props.subs.length===0
+? React.createElement(“div”,{style:{textAlign:“center”,color:C.textLight,padding:“4rem 0”}},React.createElement(“div”,{style:{fontSize:“2rem”,marginBottom:“1rem”}},”[Film]”),“No submissions yet. Be the first!”)
+: React.createElement(“div”,{style:{display:“flex”,flexDirection:“column”,gap:“0.9rem”}},
+props.subs.map(function(s,i){
+const open=expanded===i;
+const cnt=Object.keys(s.picks||{}).length;
+return React.createElement(“div”,{key:s.id||i,style:{background:C.bgCard,border:“1.5px solid “+C.border,borderRadius:8,overflow:“hidden”}},
+React.createElement(“button”,{onClick:function(){setExpanded(open?null:i);},style:{width:“100%”,padding:“0.85rem 1rem”,background:C.bgDeep,border:“none”,display:“flex”,alignItems:“center”,justifyContent:“space-between”,cursor:“pointer”,fontFamily:ff,textAlign:“left”}},
+React.createElement(“div”,null,
+React.createElement(“div”,{style:{color:C.text,fontSize:“0.95rem”,fontWeight:“bold”}},s.name),
+React.createElement(“div”,{style:{color:C.textLight,fontSize:“0.65rem”,marginTop:2}},cnt+”/”+TOTAL+” categories - “+new Date(s.submittedAt).toLocaleDateString())
+),
+React.createElement(“span”,{style:{color:C.gold,fontSize:“0.75rem”}},open?”^”:“v”)
+),
+open && React.createElement(“div”,{style:{padding:“0.85rem 1rem”}},
+React.createElement(“div”,{style:{display:“flex”,gap:“0.5rem”,padding:“0.3rem 0”,marginBottom:“0.3rem”,borderBottom:“1px solid “+C.border}},
+React.createElement(“div”,{style:{minWidth:isMobile?80:150,flexShrink:0}}),
+React.createElement(“div”,{style:{flex:1,fontSize:“0.62rem”,fontWeight:“bold”,color:C.willWin,textTransform:“uppercase”}},“Will Win”),
+React.createElement(“div”,{style:{flex:1,fontSize:“0.62rem”,fontWeight:“bold”,color:C.shouldWin,textTransform:“uppercase”}},“Should Win”)
+),
+CATEGORIES.map(function(c){
+const p=getPick(s.picks||{},c.id);
+return React.createElement(“div”,{key:c.id,style:{display:“flex”,gap:“0.5rem”,padding:“0.25rem 0”,borderBottom:“1px solid “+C.bgDeep}},
+React.createElement(“div”,{style:{color:C.textLight,fontSize:“0.68rem”,minWidth:isMobile?80:150,flexShrink:0}},c.name),
+React.createElement(“div”,{style:{flex:1,color:p.willWin?C.willWin:C.border,fontSize:“0.72rem”}},p.willWin?p.willWin.split(” - “)[0]:”-”),
+React.createElement(“div”,{style:{flex:1,color:p.shouldWin?C.shouldWin:C.border,fontSize:“0.72rem”}},p.shouldWin?p.shouldWin.split(” - “)[0]:”-”)
+);
+})
+)
+);
+})
+)
+);
+}
 
-React.useEffect(() => { loadSubs().then(setSubs); }, []);
+function App(){
+const [step,setStep]=React.useState(“intro”);
+const [name,setName]=React.useState(””);
+const [picks,setPicks]=React.useState({});
+const [subs,setSubs]=React.useState([]);
+const [saving,setSaving]=React.useState(false);
 
-async function submit() {
+React.useEffect(function(){loadSubs().then(setSubs);;},[]);
+
+async function submit(){
 setSaving(true);
-await saveSub({ name: name.trim(), picks, submittedAt: new Date().toISOString(), id: Math.random().toString(36).slice(2) });
-const updated = await loadSubs();
+await saveSub({name:name.trim(),picks:picks,submittedAt:new Date().toISOString(),id:Math.random().toString(36).slice(2)});
+const updated=await loadSubs();
 setSubs(updated);
 setSaving(false);
 setStep(“success”);
 }
+function reset(){setName(””);setPicks({});setStep(“intro”);}
+async function goLeaderboard(){const s=await loadSubs();setSubs(s);setStep(“leaderboard”);}
 
-function reset() { setName(””); setPicks({}); setStep(“intro”); }
-async function goLeaderboard() { const s = await loadSubs(); setSubs(s); setStep(“leaderboard”); }
-
-if (step === “intro”)       return <IntroScreen name={name} setName={setName} onStart={() => setStep(“ballot”)} subCount={subs.length} onViewSubs={goLeaderboard} />;
-if (step === “ballot”)      return <BallotScreen name={name} picks={picks} setPicks={setPicks} onReview={() => setStep(“confirm”)} />;
-if (step === “confirm”)     return <ConfirmScreen name={name} picks={picks} setPicks={setPicks} onSubmit={submit} onBack={() => setStep(“ballot”)} saving={saving} />;
-if (step === “success”)     return <SuccessScreen name={name} onViewSubs={goLeaderboard} onReset={reset} />;
-if (step === “leaderboard”) return <LeaderboardScreen subs={subs} onBack={reset} />;
+if(step===“intro”)return React.createElement(IntroScreen,{name:name,setName:setName,onStart:function(){setStep(“ballot”);},subCount:subs.length,onViewSubs:goLeaderboard});
+if(step===“ballot”)return React.createElement(BallotScreen,{name:name,picks:picks,setPicks:setPicks,onReview:function(){setStep(“confirm”);}});
+if(step===“confirm”)return React.createElement(ConfirmScreen,{name:name,picks:picks,setPicks:setPicks,onSubmit:submit,onBack:function(){setStep(“ballot”);},saving:saving});
+if(step===“success”)return React.createElement(SuccessScreen,{name:name,onViewSubs:goLeaderboard,onReset:reset});
+if(step===“leaderboard”)return React.createElement(LeaderboardScreen,{subs:subs,onBack:reset});
 return null;
 }
 
-ReactDOM.createRoot(document.getElementById(“root”)).render(<App />);
+ReactDOM.createRoot(document.getElementById(“root”)).render(React.createElement(App));
 </script>
 
 </body>
